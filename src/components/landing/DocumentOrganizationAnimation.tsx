@@ -32,6 +32,26 @@ const documentItems = [
   { emoji: "🔐", label: "Safe", startX: -475, startY: 135 },
   { emoji: "💾", label: "Computer Backup", startX: 155, startY: -495 },
   { emoji: "🖊️", label: "Desk Drawer", startX: -125, startY: 485 },
+  // Additional scattered duplicates for fuller effect
+  { emoji: "📄", label: "Policy Document", startX: -520, startY: -280 },
+  { emoji: "📋", label: "Insurance Form", startX: 125, startY: 510 },
+  { emoji: "🗂️", label: "Filing Cabinet", startX: -165, startY: -520 },
+  { emoji: "📱", label: "Mobile Device", startX: 485, startY: 220 },
+  { emoji: "💼", label: "Briefcase", startX: -95, startY: 315 },
+  { emoji: "🚗", label: "Vehicle", startX: 215, startY: -475 },
+  { emoji: "💻", label: "Laptop", startX: -445, startY: 425 },
+  { emoji: "📧", label: "Email", startX: 540, startY: -265 },
+  { emoji: "🧾", label: "Paper Receipt", startX: -185, startY: -185 },
+  { emoji: "📑", label: "Documents", startX: 335, startY: 445 },
+  { emoji: "🗄️", label: "File Drawer", startX: -510, startY: 315 },
+  { emoji: "📦", label: "Box", startX: 75, startY: -295 },
+  { emoji: "🔒", label: "Lock", startX: 525, startY: 155 },
+  { emoji: "🔐", label: "Secure Box", startX: -235, startY: 525 },
+  { emoji: "💾", label: "Disk", startX: 405, startY: -405 },
+  { emoji: "📚", label: "Books", startX: -425, startY: -95 },
+  { emoji: "🏠", label: "House", startX: 165, startY: 235 },
+  { emoji: "📱", label: "Phone", startX: -355, startY: -435 },
+  { emoji: "💼", label: "Work Bag", startX: 465, startY: 375 },
 ];
 
 export default function DocumentOrganizationAnimation() {
