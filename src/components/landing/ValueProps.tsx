@@ -9,85 +9,68 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
-import { TrendingUp, Folder, Assessment, Lightbulb } from "@mui/icons-material";
+import { TrendingUp, Folder } from "@mui/icons-material";
 
 const valueProps = [
   {
-    icon: <TrendingUp sx={{ fontSize: 48 }} />,
-    title: "Track Your Spending",
+    icon: <TrendingUp sx={{ fontSize: 64 }} />,
+    title: "Track Your Real Spending",
     description:
-      "Find out what you're really spending. Buddy calculates your actual insurance costs so you know exactly where your money goes.",
+      "Most people underestimate their insurance costs by thousands. See what you're actually spending.",
   },
   {
-    icon: <Folder sx={{ fontSize: 48 }} />,
-    title: "Organize Documents",
+    icon: <Folder sx={{ fontSize: 64 }} />,
+    title: "Organize Everything",
     description:
-      "Buddy reads 30-50 pages in just 30 seconds. Upload your policies and let Buddy fetch the details for you – just like a helpful companion.",
-  },
-  {
-    icon: <Assessment sx={{ fontSize: 48 }} />,
-    title: "Analyze Your Spend",
-    description:
-      "See real spending versus what you thought. Many people are surprised by their actual insurance costs – Buddy remembers everything so you don't have to.",
-  },
-  {
-    icon: <Lightbulb sx={{ fontSize: 48 }} />,
-    title: "Get Better Insights",
-    description:
-      "Buddy extracts 250+ data points from each policy. The more you share, the better Buddy can help – garbage in, garbage out!",
+      "From file cabinets to glove boxes to your phone—bring all your scattered policies into one secure place.",
   },
 ];
 
 export default function ValueProps() {
   return (
-    <Box id="features" sx={{ pt: { xs: 0, md: 6 }, pb: { xs: 8, md: 12 } }}>
+    <Box id="features" sx={{ pt: { xs: 0, md: 6 }, pb: { xs: 2, md: 3 } }}>
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="stretch">
-          {/* Left Column - First 2 cards */}
+          {/* Left Column - First card */}
           <Grid size={{ xs: 12, md: 4 }} component="div">
-            <Stack spacing={3}>
-              {valueProps.slice(0, 2).map((prop, index) => (
-                <Card
-                  key={index}
-                  elevation={0}
-                  sx={{
-                    height: { xs: "auto", md: "300px" },
-                    border: "none",
-                    borderRadius: 2,
-                    transition: "all 0.3s ease",
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
-                    "&:hover": {
-                      borderColor: "primary.main",
-                      transform: "translateY(-4px)",
-                      boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
-                    },
-                  }}
-                >
-                  <CardContent sx={{ p: 4, flexGrow: 1, display: "flex", flexDirection: "column" }}>
-                    <Stack spacing={2} sx={{ height: "100%" }}>
-                      <Box sx={{ color: "primary.main" }}>{prop.icon}</Box>
-                      <Typography
-                        variant="h6"
-                        component="h3"
-                        fontWeight={600}
-                        sx={{
-                          fontSize: "1.15rem",
-                          lineHeight: 1.3,
-                          minHeight: "30px",
-                        }}
-                      >
-                        {prop.title}
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary" sx={{ flexGrow: 1 }}>
-                        {prop.description}
-                      </Typography>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              ))}
-            </Stack>
+            <Card
+              elevation={0}
+              sx={{
+                height: "100%",
+                minHeight: { xs: "auto", md: "400px" },
+                border: "none",
+                borderRadius: 3,
+                transition: "all 0.3s ease",
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+                "&:hover": {
+                  borderColor: "primary.main",
+                  transform: "translateY(-4px)",
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
+                },
+              }}
+            >
+              <CardContent sx={{ p: 5, flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
+                <Stack spacing={3} sx={{ height: "100%", alignItems: "center" }}>
+                  <Box sx={{ color: "primary.main" }}>{valueProps[0].icon}</Box>
+                  <Typography
+                    variant="h4"
+                    component="h3"
+                    fontWeight={700}
+                    sx={{
+                      fontSize: "1.75rem",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {valueProps[0].title}
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary" sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
+                    {valueProps[0].description}
+                  </Typography>
+                </Stack>
+              </CardContent>
+            </Card>
           </Grid>
 
           {/* Center Column - Phone Video */}
@@ -128,54 +111,50 @@ export default function ValueProps() {
             </Box>
           </Grid>
 
-          {/* Right Column - Last 2 cards */}
+          {/* Right Column - Second card */}
           <Grid size={{ xs: 12, md: 4 }} component="div">
-            <Stack spacing={3}>
-              {valueProps.slice(2, 4).map((prop, index) => (
-                <Card
-                  key={index}
-                  elevation={0}
-                  sx={{
-                    height: { xs: "auto", md: "300px" },
-                    border: "none",
-                    borderRadius: 2,
-                    transition: "all 0.3s ease",
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
-                    "&:hover": {
-                      borderColor: "primary.main",
-                      transform: "translateY(-4px)",
-                      boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
-                    },
-                  }}
-                >
-                  <CardContent sx={{ p: 4, flexGrow: 1, display: "flex", flexDirection: "column" }}>
-                    <Stack spacing={2} sx={{ height: "100%" }}>
-                      <Box sx={{ color: "primary.main" }}>{prop.icon}</Box>
-                      <Typography
-                        variant="h6"
-                        component="h3"
-                        fontWeight={600}
-                        sx={{
-                          fontSize: "1.15rem",
-                          lineHeight: 1.3,
-                          minHeight: "30px",
-                        }}
-                      >
-                        {prop.title}
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary" sx={{ flexGrow: 1 }}>
-                        {prop.description}
-                      </Typography>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              ))}
-            </Stack>
+            <Card
+              elevation={0}
+              sx={{
+                height: "100%",
+                minHeight: { xs: "auto", md: "400px" },
+                border: "none",
+                borderRadius: 3,
+                transition: "all 0.3s ease",
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+                "&:hover": {
+                  borderColor: "primary.main",
+                  transform: "translateY(-4px)",
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
+                },
+              }}
+            >
+              <CardContent sx={{ p: 5, flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
+                <Stack spacing={3} sx={{ height: "100%", alignItems: "center" }}>
+                  <Box sx={{ color: "primary.main" }}>{valueProps[1].icon}</Box>
+                  <Typography
+                    variant="h4"
+                    component="h3"
+                    fontWeight={700}
+                    sx={{
+                      fontSize: "1.75rem",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {valueProps[1].title}
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary" sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
+                    {valueProps[1].description}
+                  </Typography>
+                </Stack>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </Container>
     </Box>
   );
 }
+

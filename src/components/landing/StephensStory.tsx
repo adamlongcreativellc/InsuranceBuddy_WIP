@@ -37,8 +37,8 @@ export default function StephensStory() {
               fontWeight={400}
               sx={{ maxWidth: "700px" }}
             >
-              Most people have no idea what they're actually spending on
-              insurance. Stephen's story is more common than you think.
+              Most people have no idea what they&apos;re actually spending on
+              insurance. Stephen&apos;s story is more common than you think.
             </Typography>
           </Stack>
 
@@ -153,7 +153,7 @@ export default function StephensStory() {
             <Stack spacing={2} textAlign="center">
               <Typography variant="h6" fontWeight={600} color="primary.main">
                 Stephen had 6 life insurance policies, pet insurance, and two
-                houses he'd forgotten about!
+                houses he&apos;d forgotten about!
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 Buddy organized everything and showed him where his money was

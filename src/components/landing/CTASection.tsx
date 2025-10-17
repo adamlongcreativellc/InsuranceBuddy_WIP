@@ -17,19 +17,34 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
       <>
         <Box sx={{ py: { xs: 4, md: 6 }, textAlign: "center" }}>
           <Container maxWidth="md">
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<ArrowForward />}
-              onClick={() => setDialogOpen(true)}
-              sx={{
-                px: 4,
-                py: 1.5,
-                fontSize: "1.1rem",
-              }}
-            >
-              Get Early Access
-            </Button>
+            <Box sx={{ display: "inline-block" }}>
+              <Button
+                variant="contained"
+                size="large"
+                endIcon={<ArrowForward />}
+                onClick={() => setDialogOpen(true)}
+                sx={{
+                  px: 4,
+                  py: 1.5,
+                  fontSize: "1.1rem",
+                }}
+              >
+                Get Early Access
+              </Button>
+              <Typography
+                variant="caption"
+                sx={{
+                  display: "block",
+                  textAlign: "center",
+                  mt: 0.5,
+                  fontSize: "0.85rem",
+                  color: "success.main",
+                  fontWeight: 600,
+                }}
+              >
+                100% Free • No Credit Card Required
+              </Typography>
+            </Box>
           </Container>
         </Box>
         <EarlyAccessDialog
@@ -58,7 +73,7 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
                 fontWeight: 700,
               }}
             >
-              Ready to See What You're Really Spending?
+              Ready to See What You&apos;re Really Spending?
             </Typography>
             <Typography
               variant="body1"
@@ -68,19 +83,34 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
               Join our limited beta and let Buddy help you track your insurance
               spending today.
             </Typography>
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<ArrowForward />}
-              onClick={() => setDialogOpen(true)}
-              sx={{
-                px: 4,
-                py: 1.5,
-                fontSize: "1.1rem",
-              }}
-            >
-              Get Early Access
-            </Button>
+            <Box sx={{ display: "inline-block" }}>
+              <Button
+                variant="contained"
+                size="large"
+                endIcon={<ArrowForward />}
+                onClick={() => setDialogOpen(true)}
+                sx={{
+                  px: 4,
+                  py: 1.5,
+                  fontSize: "1.1rem",
+                }}
+              >
+                Get Early Access
+              </Button>
+              <Typography
+                variant="caption"
+                sx={{
+                  display: "block",
+                  textAlign: "center",
+                  mt: 0.5,
+                  fontSize: "0.85rem",
+                  color: "success.main",
+                  fontWeight: 600,
+                }}
+              >
+                100% Free • No Credit Card Required
+              </Typography>
+            </Box>
           </Stack>
         </Container>
       </Box>

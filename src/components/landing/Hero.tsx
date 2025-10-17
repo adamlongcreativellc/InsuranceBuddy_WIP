@@ -86,9 +86,9 @@ export default function Hero() {
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                InsuranceBuddy™ helps you track your actual insurance spending,
-                organize all your policies, and get instant answers – He&apos;s your faithful
-                companion for insurance clarity.
+                Most people have no idea what they&apos;re actually spending on insurance.
+                InsuranceBuddy™ helps you discover your real spending and organize all
+                your scattered policies in one secure place.
               </Typography>
 
               <Stack
@@ -96,19 +96,34 @@ export default function Hero() {
                 spacing={2}
                 sx={{ mt: 3 }}
               >
-                <Button
-                  variant="contained"
-                  size="large"
-                  endIcon={<ArrowForward />}
-                  onClick={() => setDialogOpen(true)}
-                  sx={{
-                    px: 4,
-                    py: 1.5,
-                    fontSize: "1.1rem",
-                  }}
-                >
-                  Get Early Access
-                </Button>
+                <Box sx={{ position: "relative", display: "inline-block" }}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    endIcon={<ArrowForward />}
+                    onClick={() => setDialogOpen(true)}
+                    sx={{
+                      px: 4,
+                      py: 1.5,
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    Get Early Access
+                  </Button>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      display: "block",
+                      textAlign: "center",
+                      mt: 0.5,
+                      fontSize: "0.85rem",
+                      color: "success.main",
+                      fontWeight: 600,
+                    }}
+                  >
+                    100% Free • No Credit Card Required
+                  </Typography>
+                </Box>
                 <Button
                   variant="outlined"
                   size="large"

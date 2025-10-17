@@ -12,25 +12,25 @@ const steps = [
     icon: <Upload sx={{ fontSize: 40 }} />,
     title: "Upload Your Policies",
     description:
-      "Upload your insurance documents – auto, health, home, pet, life, and more. Buddy eats your homework so you can fetch it later!",
+      "Take a picture or upload a PDF. It's that simple. Auto, health, home, life—bring all your insurance documents together.",
     screenshot: "/images/app-screenshot-upload.png",
   },
   {
     id: 1,
     number: "2",
     icon: <AutoStories sx={{ fontSize: 40 }} />,
-    title: "Buddy Reads Everything",
+    title: "Buddy Organizes Everything",
     description:
-      "Buddy reads 30-50 pages in just 30 seconds and extracts 250+ data points from each policy – coverage, deductibles, premiums, and dates.",
+      "Buddy reads your policies in seconds and organizes all the important details—coverage, deductibles, premiums, and dates.",
     screenshot: "/images/app-screenshot-document-review.png",
   },
   {
     id: 2,
     number: "3",
     icon: <Search sx={{ fontSize: 40 }} />,
-    title: "Ask Buddy™ Anything",
+    title: "See Your Real Spending",
     description:
-      "Buddy remembers everything so you don't have to. Ask questions, track your spend, and see your actual costs. Your faithful companion is always here to help!",
+      "Track your actual insurance costs and see where your money is going. Most people are surprised by how much they're really spending.",
     screenshot: "/images/app-screenshot-policy-search.png",
   },
 ];
