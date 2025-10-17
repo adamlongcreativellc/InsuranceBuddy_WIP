@@ -3,61 +3,60 @@
 import { Box, Container, Typography, Stack } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Document items scattered across different locations - much further out
+gsap.registerPlugin(ScrollTrigger);
+
+// Document items scattered randomly around center
 const documentItems = [
-  { emoji: "📄", label: "Auto Policy", startX: -600, startY: -400 },
-  { emoji: "📋", label: "Health Insurance", startX: 650, startY: -380 },
-  { emoji: "🗂️", label: "File Cabinet", startX: -580, startY: 350 },
-  { emoji: "📱", label: "Phone Photos", startX: 680, startY: 300 },
-  { emoji: "💼", label: "Work Benefits", startX: -650, startY: -180 },
-  { emoji: "🏠", label: "Home Policy", startX: 620, startY: -420 },
-  { emoji: "🚗", label: "Car Insurance", startX: -680, startY: 380 },
-  { emoji: "💻", label: "Computer Files", startX: 580, startY: 400 },
-  { emoji: "📧", label: "Email Docs", startX: -550, startY: -450 },
-  { emoji: "🧾", label: "Receipts", startX: 660, startY: 340 },
-  { emoji: "📑", label: "Life Insurance", startX: -620, startY: 250 },
-  { emoji: "🗄️", label: "Storage Box", startX: 600, startY: -350 },
+  { emoji: "📄", label: "Auto Policy", startX: 35, startY: -445 },
+  { emoji: "📋", label: "Health Insurance", startX: 380, startY: -195 },
+  { emoji: "🗂️", label: "File Cabinet", startX: 340, startY: 235 },
+  { emoji: "📱", label: "Phone Photos", startX: -25, startY: 470 },
+  { emoji: "💼", label: "Work Benefits", startX: -385, startY: 190 },
+  { emoji: "🏠", label: "Home Policy", startX: -340, startY: -245 },
+  { emoji: "🚗", label: "Car Insurance", startX: 425, startY: -125 },
+  { emoji: "💻", label: "Computer Files", startX: 285, startY: 330 },
+  { emoji: "📧", label: "Email Docs", startX: -315, startY: 285 },
+  { emoji: "🧾", label: "Receipts", startX: -275, startY: -340 },
+  { emoji: "📑", label: "Life Insurance", startX: 465, startY: 45 },
+  { emoji: "🗄️", label: "Storage Box", startX: -455, startY: -20 },
+  { emoji: "📲", label: "Phone Storage", startX: 195, startY: -380 },
+  { emoji: "📦", label: "Storage Tub", startX: -215, startY: 395 },
+  { emoji: "🧤", label: "Glove Box", startX: 410, startY: -235 },
+  { emoji: "🍽️", label: "Kitchen Drawer", startX: -395, startY: -165 },
+  { emoji: "📚", label: "Bookshelf", startX: 235, startY: 365 },
+  { emoji: "🔒", label: "Lockbox", startX: -295, startY: -315 },
+  { emoji: "🏦", label: "Safety Deposit", startX: 500, startY: -85 },
+  { emoji: "🔐", label: "Safe", startX: -475, startY: 135 },
+  { emoji: "💾", label: "Computer Backup", startX: 155, startY: -495 },
+  { emoji: "🖊️", label: "Desk Drawer", startX: -125, startY: 485 },
 ];
 
 export default function DocumentOrganizationAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
+    if (!containerRef.current || !pinRef.current) return;
 
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    // Create GSAP ScrollTrigger for scroll-pinning
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        pin: pinRef.current,
+        start: "top top", // Start pinning when section reaches top of viewport
+        end: "+=1500", // Scroll distance needed to complete animation
+        scrub: true,
+        onUpdate: (self) => {
+          setScrollProgress(self.progress);
+        },
+      });
+    });
 
-      // Calculate progress based on scroll position
-      const scrollStart = rect.top - windowHeight;
-      const scrollEnd = rect.bottom;
-      const scrollRange = scrollEnd - scrollStart;
-      
-      let progress = -scrollStart / scrollRange;
-      progress = Math.max(0, Math.min(1, progress));
-      
-      setScrollProgress(progress);
-    };
-
-    // Throttle scroll events for performance
-    let ticking = false;
-    const throttledScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", throttledScroll);
-    handleScroll(); // Initial check
-
-    return () => window.removeEventListener("scroll", throttledScroll);
+    return () => ctx.revert();
   }, []);
 
   // Calculate position for each document based on scroll progress
@@ -71,14 +70,14 @@ export default function DocumentOrganizationAnimation() {
     
     // Scale down as they converge - ending smaller so they go "behind" the logo
     const scale = 1 - progress * 0.8; // Scale from 1 to 0.2
-    
-    // Fade in as they converge, then fade out as they go behind
-    const opacity = progress < 0.7 ? progress * 1.2 : (1 - progress) * 3;
+
+    // Fade in faster - reaches full opacity at 0.4 progress, then fades out
+    const opacity = progress < 0.4 ? progress * 2.5 : progress < 0.7 ? 1 : (1 - progress) * 3;
 
     return {
       transform: `translate(${currentX}px, ${currentY}px) scale(${scale})`,
       opacity: Math.max(0, Math.min(1, opacity)),
-      zIndex: 1,
+      zIndex: 0,
     };
   };
 
@@ -86,19 +85,18 @@ export default function DocumentOrganizationAnimation() {
     <Box
       ref={containerRef}
       sx={{
-        minHeight: "150vh", // Reduced from 200vh to eliminate excessive space
+        minHeight: "130vh",
         position: "relative",
-        py: 0,
-        background: "linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 50%, #F8F9FA 100%)",
+        py: 10,
+        mt: { xs: -12, md: -16 },
+        background: "transparent",
         overflow: "hidden",
       }}
     >
       <Box
+        ref={pinRef}
         sx={{
-          position: "sticky",
-          top: "50%",
-          transform: "translateY(-50%)",
-          height: { xs: "80vh", md: "70vh" },
+          height: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -106,15 +104,15 @@ export default function DocumentOrganizationAnimation() {
       >
         <Container maxWidth="lg">
           <Stack spacing={4} alignItems="center" textAlign="center">
-            {/* Header text - fades out completely */}
+            {/* Header text */}
             <Box
               sx={{
-                opacity: scrollProgress < 0.3 ? 1 : Math.max(0, 1 - (scrollProgress - 0.3) * 2.5),
-                transition: "opacity 0.2s ease",
+                opacity: 1,
                 position: "absolute",
-                top: { xs: 40, md: 60 },
+                top: { xs: 60, md: 80 },
                 left: 0,
                 right: 0,
+                zIndex: 20,
               }}
             >
               <Typography
@@ -122,6 +120,7 @@ export default function DocumentOrganizationAnimation() {
                 sx={{
                   fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
                   mb: 2,
+                  textShadow: "0 2px 8px rgba(255, 255, 255, 0.8)",
                 }}
               >
                 Your Insurance Documents Are Everywhere
@@ -130,7 +129,11 @@ export default function DocumentOrganizationAnimation() {
                 variant="h6"
                 color="text.secondary"
                 fontWeight={400}
-                sx={{ maxWidth: "700px", mx: "auto" }}
+                sx={{
+                  maxWidth: "700px",
+                  mx: "auto",
+                  textShadow: "0 1px 4px rgba(255, 255, 255, 0.8)",
+                }}
               >
                 File cabinets, glove boxes, phones, computers, email—scattered chaos.
               </Typography>
@@ -208,12 +211,13 @@ export default function DocumentOrganizationAnimation() {
             {/* Bottom text - positioned absolutely to avoid overlap */}
             <Box
               sx={{
-                opacity: scrollProgress > 0.65 ? Math.min(1, (scrollProgress - 0.65) * 2.5) : 0,
+                opacity: scrollProgress > 0.6 ? Math.min(1, (scrollProgress - 0.6) * 2.5) : 0,
                 transition: "opacity 0.2s ease",
                 position: "absolute",
-                bottom: { xs: 100, md: 120 },
+                bottom: { xs: 80, md: 100 },
                 left: 0,
                 right: 0,
+                zIndex: 20,
               }}
             >
               <Typography
@@ -223,6 +227,7 @@ export default function DocumentOrganizationAnimation() {
                 sx={{
                   fontSize: { xs: "1.5rem", md: "2rem" },
                   mb: 2,
+                  textShadow: "0 2px 8px rgba(255, 255, 255, 0.8)",
                 }}
               >
                 ✨ All Organized in One Place
@@ -231,7 +236,11 @@ export default function DocumentOrganizationAnimation() {
                 variant="h6"
                 color="text.secondary"
                 fontWeight={400}
-                sx={{ maxWidth: "700px", mx: "auto" }}
+                sx={{
+                  maxWidth: "700px",
+                  mx: "auto",
+                  textShadow: "0 1px 4px rgba(255, 255, 255, 0.8)",
+                }}
               >
                 InsuranceBuddy™ brings everything together—secure, organized, and always accessible.
               </Typography>

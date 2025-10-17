@@ -14,7 +14,7 @@ export default function Hero() {
       sx={{
         background: "linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 100%)",
         pt: { xs: 12, md: 16 },
-        pb: { xs: 6, md: 6 },
+        pb: { xs: 4, md: 4 },
       }}
     >
       <Container maxWidth="lg">

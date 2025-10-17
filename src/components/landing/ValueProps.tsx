@@ -51,7 +51,7 @@ export default function ValueProps() {
                 },
               }}
             >
-              <CardContent sx={{ p: 5, flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
+              <CardContent sx={{ p: 4, flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <Stack spacing={3} sx={{ height: "100%", alignItems: "center" }}>
                   <Box sx={{ color: "primary.main" }}>{valueProps[0].icon}</Box>
                   <Typography
@@ -61,11 +61,12 @@ export default function ValueProps() {
                     sx={{
                       fontSize: "1.75rem",
                       lineHeight: 1.3,
+                      textAlign: "center",
                     }}
                   >
                     {valueProps[0].title}
                   </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
+                  <Typography variant="body1" color="text.secondary" sx={{ fontSize: "1.1rem", lineHeight: 1.8, textAlign: "left" }}>
                     {valueProps[0].description}
                   </Typography>
                 </Stack>
@@ -131,7 +132,7 @@ export default function ValueProps() {
                 },
               }}
             >
-              <CardContent sx={{ p: 5, flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
+              <CardContent sx={{ p: 4, flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <Stack spacing={3} sx={{ height: "100%", alignItems: "center" }}>
                   <Box sx={{ color: "primary.main" }}>{valueProps[1].icon}</Box>
                   <Typography
@@ -141,11 +142,12 @@ export default function ValueProps() {
                     sx={{
                       fontSize: "1.75rem",
                       lineHeight: 1.3,
+                      textAlign: "center",
                     }}
                   >
                     {valueProps[1].title}
                   </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
+                  <Typography variant="body1" color="text.secondary" sx={{ fontSize: "1.1rem", lineHeight: 1.8, textAlign: "left" }}>
                     {valueProps[1].description}
                   </Typography>
                 </Stack>

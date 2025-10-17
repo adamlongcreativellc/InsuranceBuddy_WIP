@@ -122,8 +122,8 @@ export default function InsuranceTypes() {
                       <CheckCircle
                         sx={{
                           color: "success.main",
-                          fontSize: 28,
-                          opacity: 0.3,
+                          fontSize: 32,
+                          opacity: 0.8,
                         }}
                       />
                     </TableCell>

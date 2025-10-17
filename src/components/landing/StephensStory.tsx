@@ -17,6 +17,7 @@ export default function StephensStory() {
       id="social-proof"
       sx={{
         py: { xs: 8, md: 12 },
+        mt: 0,
         bgcolor: "grey.50",
       }}
     >
