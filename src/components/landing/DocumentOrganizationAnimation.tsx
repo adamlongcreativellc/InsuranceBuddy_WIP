@@ -69,7 +69,7 @@ export default function DocumentOrganizationAnimation() {
         pin: pinRef.current,
         start: "top top", // Start pinning when section reaches top of viewport
         end: "+=1500", // Scroll distance needed to complete animation
-        scrub: true,
+        scrub: 1, // Smooth easing (1 second of smoothing)
         onUpdate: (self) => {
           setScrollProgress(self.progress);
         },
