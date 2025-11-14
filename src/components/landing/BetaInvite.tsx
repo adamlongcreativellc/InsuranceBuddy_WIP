@@ -13,10 +13,10 @@ import { useState, useEffect } from "react";
 import EarlyAccessDialog from "./EarlyAccessDialog";
 
 const betaCopyOptions = [
-  "We're starting with a limited beta to ensure quality.",
-  "We're rolling out slowly to make sure everything works just right.",
-  "Early access means early feedback — help shape the future of InsuranceBuddy™.",
-  "Limited beta, unlimited potential. We're just getting started.",
+  "We're starting with a small beta to make sure it works great.",
+  "We're going slow to make sure it all works just right.",
+  "Early access means early feedback — help shape what Buddy becomes.",
+  "Small beta, big potential. We're just getting started.",
 ];
 
 export default function BetaInvite() {

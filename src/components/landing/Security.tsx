@@ -8,25 +8,25 @@ const securityFeatures = [
     icon: <Lock />,
     title: "Private AI",
     description:
-      "Gated AI that only works with YOUR data. Your information stays with you – never shared or sold.",
+      "Private AI that only works with YOUR data. Your info stays with you – never shared or sold.",
   },
   {
     icon: <Block />,
     title: "We Work for You",
     description:
-      "We don't sell anything, we work for you. No insurance sales, no data monetization – just a helpful companion.",
+      "We don't sell things, we work for you. No insurance sales, we don't sell your data – just a helpful pal.",
   },
   {
     icon: <Visibility />,
-    title: "Your Companion Only",
+    title: "Your Pal Only",
     description:
-      "Buddy is your faithful companion, not an advisor. We organize and explain – you make the decisions.",
+      "Buddy is your faithful pal, not an advisor. We sort and explain – you choose what to do.",
   },
   {
     icon: <Delete />,
-    title: "Industry Standard Security",
+    title: "Top Safety",
     description:
-      "Your data is encrypted and protected with industry-standard security. Delete your data anytime.",
+      "Your data is locked and kept safe with top safety. Delete your data any time.",
   },
 ];
 
@@ -42,7 +42,7 @@ export default function Security() {
                 fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
               }}
             >
-              Security & Privacy
+              Safety and Privacy
             </Typography>
             <Typography
               variant="h6"
@@ -50,9 +50,8 @@ export default function Security() {
               fontWeight={400}
               sx={{ maxWidth: "700px" }}
             >
-              Your data is yours alone. Buddy uses private AI that only
-              accesses your information – completely secure, never shared,
-              always working for you.
+              Your data is yours. Buddy uses private AI that only sees your
+              info – fully safe, never shared, always working for you.
             </Typography>
           </Stack>
 

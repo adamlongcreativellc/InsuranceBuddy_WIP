@@ -68,7 +68,7 @@ export default function DocumentOrganizationAnimation() {
         trigger: containerRef.current,
         pin: pinRef.current,
         start: "top top", // Start pinning when section reaches top of viewport
-        end: "+=1500", // Scroll distance needed to complete animation
+        end: "+=2500", // Extended scroll distance for longer, more visible animation
         scrub: 1, // Smooth easing (1 second of smoothing)
         onUpdate: (self) => {
           setScrollProgress(self.progress);
@@ -78,6 +78,14 @@ export default function DocumentOrganizationAnimation() {
 
     return () => ctx.revert();
   }, []);
+
+  // Calculate Buddy's position based on scroll progress
+  const getBuddyPosition = () => {
+    // Buddy stays centered and stationary
+    return { x: 0, y: 0, scale: 1 };
+  };
+
+  const buddyPos = getBuddyPosition();
 
   // Calculate position for each document based on scroll progress
   const getDocumentStyle = (item: typeof documentItems[0]) => {
@@ -143,7 +151,7 @@ export default function DocumentOrganizationAnimation() {
                   textShadow: "0 2px 8px rgba(255, 255, 255, 0.8)",
                 }}
               >
-                Your Insurance Documents Are Everywhere
+                Your Insurance Plans Are All Over
               </Typography>
               <Typography
                 variant="h6"
@@ -155,7 +163,7 @@ export default function DocumentOrganizationAnimation() {
                   textShadow: "0 1px 4px rgba(255, 255, 255, 0.8)",
                 }}
               >
-                File cabinets, glove boxes, phones, computers, email—scattered chaos.
+                File drawers, glove boxes, phones, computers, email—total chaos.
               </Typography>
             </Box>
 
@@ -179,8 +187,7 @@ export default function DocumentOrganizationAnimation() {
                     position: "absolute",
                     fontSize: { xs: "3rem", md: "4rem" },
                     ...getDocumentStyle(item),
-                    willChange: "transform, opacity",
-                    transition: "transform 0.1s ease-out, opacity 0.1s ease-out",
+                    willChange: "transform",
                     pointerEvents: "none",
                     userSelect: "none",
                   }}
@@ -191,10 +198,244 @@ export default function DocumentOrganizationAnimation() {
                 </Box>
               ))}
 
-              {/* Center logo - Buddy */}
+              {/* Chaos messaging - floating questions */}
               <Box
                 sx={{
-                  position: "relative",
+                  position: "absolute",
+                  top: { xs: "15%", md: "20%" },
+                  left: { xs: "5%", md: "10%" },
+                  opacity: scrollProgress > 0.1 && scrollProgress < 0.35 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Where did I put that policy?&rdquo;
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: { xs: "68%", md: "70%" },
+                  right: { xs: "8%", md: "12%" },
+                  opacity: scrollProgress > 0.2 && scrollProgress < 0.45 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Was it in the car?&rdquo;
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: { xs: "18%", md: "20%" },
+                  left: { xs: "8%", md: "15%" },
+                  opacity: scrollProgress > 0.15 && scrollProgress < 0.4 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Maybe the desk?&rdquo;
+                </Typography>
+              </Box>
+
+              {/* Additional chaos questions */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: { xs: "10%", md: "15%" },
+                  right: { xs: "5%", md: "12%" },
+                  opacity: scrollProgress > 0.05 && scrollProgress < 0.3 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Did I scan that?&rdquo;
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: { xs: "32%", md: "35%" },
+                  left: { xs: "3%", md: "8%" },
+                  opacity: scrollProgress > 0.18 && scrollProgress < 0.42 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Is it in my email?&rdquo;
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: { xs: "50%", md: "52%" },
+                  right: { xs: "5%", md: "10%" },
+                  opacity: scrollProgress > 0.25 && scrollProgress < 0.48 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Check the storage box?&rdquo;
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: { xs: "8%", md: "10%" },
+                  right: { xs: "25%", md: "30%" },
+                  opacity: scrollProgress > 0.12 && scrollProgress < 0.38 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Which phone has it?&rdquo;
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: { xs: "52%", md: "55%" },
+                  left: { xs: "5%", md: "10%" },
+                  opacity: scrollProgress > 0.22 && scrollProgress < 0.46 ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.98)",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid rgba(0, 0, 0, 0.1)",
+                    fontStyle: "italic",
+                    color: "error.main",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                  }}
+                >
+                  &ldquo;Filing cabinet or desk?&rdquo;
+                </Typography>
+              </Box>
+
+              {/* Center logo - Buddy (now moves to fetch documents!) */}
+              <Box
+                sx={{
+                  position: "absolute",
                   zIndex: 10,
                   width: { xs: 160, md: 220 },
                   height: { xs: 160, md: 220 },
@@ -204,8 +445,8 @@ export default function DocumentOrganizationAnimation() {
                   alignItems: "center",
                   justifyContent: "center",
                   boxShadow: `0 8px 32px rgba(38, 136, 227, ${0.3 + scrollProgress * 0.4})`,
-                  transform: `scale(${1 + scrollProgress * 0.3})`,
-                  transition: "transform 0.1s ease-out, box-shadow 0.1s ease-out",
+                  transform: `translate(${buddyPos.x}px, ${buddyPos.y}px) scale(${buddyPos.scale})`,
+                  willChange: "transform, box-shadow",
                   overflow: "hidden",
                 }}
               >
@@ -250,7 +491,7 @@ export default function DocumentOrganizationAnimation() {
                   textShadow: "0 2px 8px rgba(255, 255, 255, 0.8)",
                 }}
               >
-                ✨ All Organized in One Place
+                ✨ All Sorted in One Place
               </Typography>
               <Typography
                 variant="h6"
@@ -262,7 +503,7 @@ export default function DocumentOrganizationAnimation() {
                   textShadow: "0 1px 4px rgba(255, 255, 255, 0.8)",
                 }}
               >
-                InsuranceBuddy™ brings everything together—secure, organized, and always accessible.
+                Buddy brings it all together—safe, sorted, and always there for you.
               </Typography>
             </Box>
           </Stack>

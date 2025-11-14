@@ -14,6 +14,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
+import PatentBadge from "./PatentBadge";
 
 const insuranceTypes = [
   { name: "Auto Insurance", common: true },
@@ -56,9 +57,12 @@ export default function InsuranceTypes() {
               fontWeight={400}
               sx={{ maxWidth: "700px" }}
             >
-              Most people forget about policies they&apos;ve accumulated over the years.
-              How many of these do you have?
+              Most folks forget about plans they&apos;ve picked up over the years.
+              How many do you have?
             </Typography>
+            <Box sx={{ mt: 2 }}>
+              <PatentBadge />
+            </Box>
           </Stack>
 
           <TableContainer
@@ -145,7 +149,7 @@ export default function InsuranceTypes() {
             }}
           >
             <Typography variant="h6" fontWeight={600} color="primary.main">
-              InsuranceBuddy™ helps you track all of them in one place
+              Buddy helps you track all of them in one place
             </Typography>
           </Paper>
         </Stack>

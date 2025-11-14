@@ -79,6 +79,12 @@ export default function EarlyAccessDialog({
       return;
     }
 
+    // Form submission disabled for static build
+    setErrors({
+      submit: "Form submission is disabled in this static version. Please visit the live site to join the waitlist.",
+    });
+
+    /* Original API call - disabled for static export
     setIsSubmitting(true);
     setErrors({});
 
@@ -125,6 +131,7 @@ export default function EarlyAccessDialog({
     } finally {
       setIsSubmitting(false);
     }
+    */
   };
 
   const handlePersonalInsuranceToggle = (option: string) => {

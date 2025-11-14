@@ -4,33 +4,34 @@ import { Box, Container, Typography, Stack, Grid, Paper } from "@mui/material";
 import { Upload, AutoStories, Search } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import PatentBadge from "./PatentBadge";
 
 const steps = [
   {
     id: 0,
     number: "1",
     icon: <Upload sx={{ fontSize: 40 }} />,
-    title: "Upload Your Policies",
+    title: "Upload Your Plans",
     description:
-      "Take a picture or upload a PDF. It's that simple. Auto, health, home, life—bring all your insurance documents together.",
+      "Take a photo or upload a file. That's it. Auto, health, home, life—bring all your papers.",
     screenshot: "/images/app-screenshot-upload.png",
   },
   {
     id: 1,
     number: "2",
     icon: <AutoStories sx={{ fontSize: 40 }} />,
-    title: "Buddy Organizes Everything",
+    title: "Buddy Sorts It All",
     description:
-      "Buddy reads your policies in seconds and organizes all the important details—coverage, deductibles, premiums, and dates.",
+      "Buddy reads your plans in seconds and sorts all the key bits—what you're covered for, what you pay, and when.",
     screenshot: "/images/app-screenshot-document-review.png",
   },
   {
     id: 2,
     number: "3",
     icon: <Search sx={{ fontSize: 40 }} />,
-    title: "See Your Real Spending",
+    title: "See Your Real Spend",
     description:
-      "Track your actual insurance costs and see where your money is going. Most people are surprised by how much they're really spending.",
+      "Track what you really pay and see where your cash goes. Most folks are shocked by how much they spend.",
     screenshot: "/images/app-screenshot-policy-search.png",
   },
 ];
@@ -79,7 +80,7 @@ export default function HowItWorks() {
             fontWeight={400}
             sx={{ maxWidth: "600px" }}
           >
-            Three simple steps to organize and understand your insurance
+            Three easy steps to sort and see your insurance
           </Typography>
         </Stack>
 
@@ -148,6 +149,69 @@ export default function HowItWorks() {
                     >
                       {step.description}
                     </Typography>
+                    {index === 1 && (
+                      <>
+                        <Grid container spacing={2} sx={{ mt: 1 }}>
+                          <Grid size={{ xs: 4 }} component="div">
+                            <Box sx={{ textAlign: "center" }}>
+                              <Typography
+                                variant="h5"
+                                fontWeight={700}
+                                color="primary.main"
+                              >
+                                458
+                              </Typography>
+                              <Typography
+                                variant="caption"
+                                color="text.secondary"
+                                sx={{ fontSize: "0.7rem" }}
+                              >
+                                Policy Elements
+                              </Typography>
+                            </Box>
+                          </Grid>
+                          <Grid size={{ xs: 4 }} component="div">
+                            <Box sx={{ textAlign: "center" }}>
+                              <Typography
+                                variant="h5"
+                                fontWeight={700}
+                                color="primary.main"
+                              >
+                                30s
+                              </Typography>
+                              <Typography
+                                variant="caption"
+                                color="text.secondary"
+                                sx={{ fontSize: "0.7rem" }}
+                              >
+                                Read Time
+                              </Typography>
+                            </Box>
+                          </Grid>
+                          <Grid size={{ xs: 4 }} component="div">
+                            <Box sx={{ textAlign: "center" }}>
+                              <Typography
+                                variant="h5"
+                                fontWeight={700}
+                                color="primary.main"
+                              >
+                                99%+
+                              </Typography>
+                              <Typography
+                                variant="caption"
+                                color="text.secondary"
+                                sx={{ fontSize: "0.7rem" }}
+                              >
+                                Accurate
+                              </Typography>
+                            </Box>
+                          </Grid>
+                        </Grid>
+                        <Box sx={{ mt: 2 }}>
+                          <PatentBadge size="small" />
+                        </Box>
+                      </>
+                    )}
                   </Stack>
                 </Paper>
               ))}

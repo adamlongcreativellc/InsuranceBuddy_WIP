@@ -15,42 +15,42 @@ const faqs = [
   {
     question: "Is Buddy an insurance advisor?",
     answer:
-      "No. Buddy is your faithful companion, not an advisor. Think of Buddy like a helpful dog – we read your documents, fetch information when you ask, and remember everything so you don't have to. We organize and explain, but you make all the decisions.",
+      "No. Buddy is your faithful pal, not an advisor. Think of Buddy like a helpful dog – we read your papers, fetch info when you ask, and recall it all so you don't have to. We sort and explain, but you choose what to do.",
   },
   {
-    question: "How does Buddy help me track my spending?",
+    question: "How does Buddy help me track my spend?",
     answer:
-      "Buddy reads all your insurance documents and calculates your actual annual spending. Many people are surprised to learn they're spending much more than they thought – just like Stephen, who thought he spent $12,000 but was actually spending $35,000!",
+      "Buddy reads all your insurance papers and adds up what you really spend each year. Many folks are shocked to learn they spend way more than they thought – just like Stephen, who thought he spent $12,000 but really spent $35,000!",
   },
   {
-    question: "Which policy types are supported?",
+    question: "Which plan types work?",
     answer:
-      "All personal insurance: auto, home, renters, health, dental, vision, life, disability, long-term care, pet insurance, umbrella policies, and more. Buddy reads 30-50 pages in just 30 seconds and extracts 250+ data points from each policy.",
+      "All personal insurance: auto, home, renters, health, dental, vision, life, disability, long-term care, pet insurance, umbrella plans, and more. Buddy reads 30-50 pages in just 30 seconds and pulls out 250+ facts from each plan.",
   },
   {
-    question: "Is my information secure?",
+    question: "Is my info safe?",
     answer:
-      "Absolutely. Buddy uses private, gated AI that only works with YOUR data. Your information is never shared or sold. We use industry-standard encryption and you can delete your data anytime. We don't sell anything – we work for you.",
+      "Yes. Buddy uses private AI that only works with YOUR data. Your info is never shared or sold. We use top safety and you can delete your data any time. We don't sell things – we work for you.",
   },
   {
-    question: "What if I don't upload all my documents?",
+    question: "What if I don't upload all my files?",
     answer:
-      "Garbage in, garbage out! Buddy can only help with what you share. The more documents you upload, the better Buddy can track your spending and answer your questions. Upload everything for the best results.",
+      "Bad data in, bad data out! Buddy can only help with what you share. The more papers you upload, the better Buddy can track what you spend and answer your questions. Upload it all for the best results.",
   },
   {
-    question: "Which phones can I use with InsuranceBuddy™?",
+    question: "Which phones work with Buddy?",
     answer:
-      "InsuranceBuddy™ is available for both iPhone and Android during the beta period.",
+      "Buddy works on both iPhone and Android during the beta.",
   },
   {
     question: "How much does it cost?",
     answer:
-      "The app is free during beta. When we officially launch, there will be a free version for everyone, plus optional paid features for those who want extra tools.",
+      "The app is free during beta. When we launch for real, there will be a free type for all, plus paid features if you want extra tools.",
   },
   {
     question: "Who can join the beta?",
     answer:
-      "We're starting with a limited beta to ensure quality. Join our waitlist to get early access!",
+      "We're starting with a small beta to make sure it works great. Join our waitlist to get in early!",
   },
 ];
 
@@ -66,7 +66,7 @@ export default function FAQ() {
                 fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
               }}
             >
-              Frequently Asked Questions
+              Questions We Get a Lot
             </Typography>
             <Typography variant="h6" color="text.secondary" fontWeight={400}>
               Everything you need to know about InsuranceBuddy

@@ -68,8 +68,8 @@ export default function SavingsCalculator() {
               fontWeight={400}
               sx={{ maxWidth: "700px" }}
             >
-              Most households spend 15-20% of their income on insurance—often without realizing it.
-              See your estimated spending and potential savings.
+              Most homes spend 18% of their pay on insurance—and don&apos;t even know it.
+              See what you spend and what you could save.
             </Typography>
           </Stack>
 
@@ -90,7 +90,7 @@ export default function SavingsCalculator() {
                   gutterBottom
                   sx={{ mb: 2 }}
                 >
-                  Select Your Household Income
+                  Pick Your Home Pay
                 </Typography>
                 <Grid container spacing={2}>
                   {incomeRanges.map((range) => (
@@ -129,7 +129,7 @@ export default function SavingsCalculator() {
                 <Box sx={{ mt: 3 }} suppressHydrationWarning>
                   <TextField
                     fullWidth
-                    label="Or enter a custom amount"
+                    label="Or type a custom amount"
                     variant="outlined"
                     value={customIncome}
                     onChange={handleCustomIncomeChange}
@@ -172,7 +172,7 @@ export default function SavingsCalculator() {
                         ${currentIncome.toLocaleString()}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Your Household Income
+                        Your Home Pay
                       </Typography>
                     </Stack>
                   </Grid>
@@ -190,7 +190,7 @@ export default function SavingsCalculator() {
                         ${insuranceSpend.toLocaleString()}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Est. Annual Insurance Spend
+                        Est. Insurance Spend Each Year
                       </Typography>
                     </Stack>
                   </Grid>
@@ -208,7 +208,7 @@ export default function SavingsCalculator() {
                         ${estimatedSavings.toLocaleString()}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Potential Annual Savings
+                        What You Could Save Each Year
                       </Typography>
                     </Stack>
                   </Grid>
@@ -231,10 +231,9 @@ export default function SavingsCalculator() {
                   fontWeight={500}
                   color="success.dark"
                 >
-                  💡 <strong>That&apos;s ${estimatedSavings.toLocaleString()}</strong> you could put toward a vacation,
-                  retirement, or your kids&apos; education. InsuranceBuddy™ helps you find
-                  these savings by organizing your policies and showing you where your
-                  money is really going.
+                  💡 <strong>That&apos;s ${estimatedSavings.toLocaleString()}</strong> you could use for a trip,
+                  for when you retire, or for your kids&apos; school. Buddy helps you find
+                  this cash by sorting your plans and showing where it goes.
                 </Typography>
               </Paper>
             </Stack>
@@ -242,8 +241,8 @@ export default function SavingsCalculator() {
 
           <Stack spacing={2} alignItems="center" textAlign="center">
             <Typography variant="body2" color="text.secondary" sx={{ fontSize: "0.9rem", fontStyle: "italic" }}>
-              * Estimates based on average household insurance spending including employer contributions.
-              Actual spending and savings may vary based on your specific situation.
+              * Guesses based on what most homes spend, plus what jobs pay.
+              Your real spend and savings may differ.
             </Typography>
           </Stack>
         </Stack>

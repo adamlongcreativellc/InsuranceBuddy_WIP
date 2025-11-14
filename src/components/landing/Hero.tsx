@@ -4,6 +4,7 @@ import { Box, Container, Typography, Button, Stack, Grid } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
 import { useState } from "react";
 import EarlyAccessDialog from "./EarlyAccessDialog";
+import PatentBadge from "./PatentBadge";
 import { handleSmoothScroll } from "@/utils/smoothScroll";
 
 export default function Hero() {
@@ -77,6 +78,10 @@ export default function Hero() {
                 on Insurance?
               </Typography>
 
+              <Box sx={{ mt: 2, display: { xs: "flex", md: "block" }, justifyContent: { xs: "center", md: "flex-start" } }}>
+                <PatentBadge />
+              </Box>
+
               <Typography
                 variant="h5"
                 color="text.secondary"
@@ -86,9 +91,8 @@ export default function Hero() {
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                Most people have no idea what they&apos;re actually spending on insurance.
-                InsuranceBuddy™ helps you discover your real spending and organize all
-                your scattered policies in one secure place.
+                Most folks don&apos;t know what they spend on insurance. Buddy shows you
+                the real number. He finds all your lost plans and puts them in one safe spot.
               </Typography>
 
               <Stack
@@ -121,7 +125,7 @@ export default function Hero() {
                       fontWeight: 600,
                     }}
                   >
-                    100% Free • No Credit Card Required
+                    100% Free • No Credit Card
                   </Typography>
                 </Box>
                 <Button
@@ -203,7 +207,7 @@ export default function Hero() {
                 fontWeight: 500,
               }}
             >
-              Join our limited beta
+              Join our beta
             </Typography>
           </Box>
         </Stack>

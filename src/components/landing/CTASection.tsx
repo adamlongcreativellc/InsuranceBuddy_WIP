@@ -42,7 +42,7 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
                   fontWeight: 600,
                 }}
               >
-                100% Free • No Credit Card Required
+                100% Free • No Credit Card
               </Typography>
             </Box>
           </Container>
@@ -80,8 +80,8 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
               color="text.secondary"
               sx={{ maxWidth: "600px" }}
             >
-              Join our limited beta and let Buddy help you track your insurance
-              spending today.
+              Join our beta and let Buddy help you track what you spend on insurance.
+              Don&apos;t believe us? Download for free and see for yourself.
             </Typography>
             <Box sx={{ display: "inline-block" }}>
               <Button
@@ -108,7 +108,7 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
                   fontWeight: 600,
                 }}
               >
-                100% Free • No Credit Card Required
+                100% Free • No Credit Card
               </Typography>
             </Box>
           </Stack>

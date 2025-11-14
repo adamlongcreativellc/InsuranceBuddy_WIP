@@ -2,7 +2,7 @@ import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
 import ValueProps from "@/components/landing/ValueProps";
 import CTASection from "@/components/landing/CTASection";
-import StephensStory from "@/components/landing/StephensStory";
+import LifeProgressionStory from "@/components/landing/LifeProgressionStory";
 import DocumentOrganizationAnimation from "@/components/landing/DocumentOrganizationAnimation";
 import SavingsCalculator from "@/components/landing/SavingsCalculator";
 import InsuranceTypes from "@/components/landing/InsuranceTypes";
@@ -19,12 +19,12 @@ export default function Home() {
       <Hero />
       <ValueProps />
       <DocumentOrganizationAnimation />
-      <StephensStory />
+      <LifeProgressionStory />
       <SavingsCalculator />
       <CTASection variant="compact" />
       <InsuranceTypes />
       <HowItWorks />
-      <CTASection variant="compact" />
+      <CTASection variant="default" />
       <Security />
       <BetaInvite />
       <FAQ />
