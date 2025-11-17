@@ -299,7 +299,7 @@ export default function LifeProgressionStory() {
             }}
           >
             <Typography variant="h6" fontWeight={600} color="primary.main" gutterBottom>
-              Life adds up fast—but you don't have to guess.
+              Life adds up fast—but you don&apos;t have to guess.
             </Typography>
             <Typography variant="body1" color="text.secondary">
               Buddy shows you what you really spend. No advice, no judgment – just facts.

@@ -1,10 +1,11 @@
-import { Chip } from "@mui/material";
+import { Chip, SxProps, Theme } from "@mui/material";
 
 interface PatentBadgeProps {
   size?: "small" | "medium";
+  sx?: SxProps<Theme>;
 }
 
-export default function PatentBadge({ size = "medium" }: PatentBadgeProps) {
+export default function PatentBadge({ size = "medium", sx }: PatentBadgeProps) {
   return (
     <Chip
       label="Patent Pending"
@@ -19,6 +20,7 @@ export default function PatentBadge({ size = "medium" }: PatentBadgeProps) {
         "& .MuiChip-label": {
           px: 2,
         },
+        ...sx,
       }}
     />
   );

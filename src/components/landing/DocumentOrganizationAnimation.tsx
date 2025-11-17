@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import PatentBadge from "./PatentBadge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -160,11 +161,15 @@ export default function DocumentOrganizationAnimation() {
                 sx={{
                   maxWidth: "700px",
                   mx: "auto",
+                  mb: 2,
                   textShadow: "0 1px 4px rgba(255, 255, 255, 0.8)",
                 }}
               >
                 File drawers, glove boxes, phones, computers, email—total chaos.
               </Typography>
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 1.5 }}>
+                <PatentBadge size="small" />
+              </Box>
             </Box>
 
             {/* Animation container */}

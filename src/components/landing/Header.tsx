@@ -1,10 +1,11 @@
 "use client";
 
 import { ArrowForward } from "@mui/icons-material";
-import { AppBar, Toolbar, Button, Box, Container } from "@mui/material";
+import { AppBar, Toolbar, Button, Box, Container, Stack } from "@mui/material";
 import { useState, useEffect } from "react";
 import { handleSmoothScroll } from "@/utils/smoothScroll";
 import EarlyAccessDialog from "./EarlyAccessDialog";
+import PatentBadge from "./PatentBadge";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -45,15 +46,27 @@ export default function Header() {
       >
         <Container maxWidth="lg">
           <Toolbar sx={{ px: "0 !important", py: 1 }}>
-            <Link href="/" style={{ cursor: "pointer" }}>
-              <Image
-                src="/images/insurancebuddy-logo-white.svg"
-                alt="InsuranceBuddy™"
-                width={220}
-                height={32}
-                style={{ marginTop: "4px" }}
-              />
-            </Link>
+            <Stack direction="row" alignItems="center" spacing={1.5}>
+              <Link href="/" style={{ cursor: "pointer" }}>
+                <Image
+                  src="/images/insurancebuddy-logo-white.svg"
+                  alt="InsuranceBuddy™"
+                  width={220}
+                  height={32}
+                  style={{ marginTop: "4px" }}
+                />
+              </Link>
+              <Box sx={{ mt: "4px" }}>
+                <PatentBadge
+                  size="small"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.2)",
+                    color: "white",
+                    borderColor: "rgba(255, 255, 255, 0.3)",
+                  }}
+                />
+              </Box>
+            </Stack>
 
             <Box
               sx={{

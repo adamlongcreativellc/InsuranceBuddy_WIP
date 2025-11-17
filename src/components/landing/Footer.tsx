@@ -6,9 +6,7 @@ import {
   Typography,
   Stack,
   Link,
-  IconButton,
 } from "@mui/material";
-import { Facebook, YouTube, X, LinkedIn } from "@mui/icons-material";
 import { handleSmoothScroll } from "@/utils/smoothScroll";
 import Image from "next/image";
 
@@ -27,13 +25,6 @@ export default function Footer() {
     { label: "Terms of Service", href: "/terms" },
   ];
 
-  const socialLinks = [
-    { icon: <Facebook />, href: "https://facebook.com", label: "Facebook" },
-    { icon: <YouTube />, href: "https://youtube.com", label: "YouTube" },
-    { icon: <X />, href: "https://twitter.com", label: "X (Twitter)" },
-    { icon: <LinkedIn />, href: "https://linkedin.com", label: "LinkedIn" },
-  ];
-
   return (
     <Box
       component="footer"
@@ -46,44 +37,15 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Stack spacing={3}>
-          {/* Top section with logo and social icons */}
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            flexWrap="wrap"
-            gap={2}
-          >
-            <Box>
-              <Image
-                src="/images/insurancebuddy-logo-black.svg"
-                alt="InsuranceBuddy™"
-                width={210}
-                height={28}
-              />
-            </Box>
-
-            <Stack direction="row" spacing={1}>
-              {socialLinks.map((social) => (
-                <IconButton
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  size="small"
-                  sx={{
-                    color: "text.secondary",
-                    "&:hover": {
-                      color: "text.primary",
-                    },
-                  }}
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </IconButton>
-              ))}
-            </Stack>
-          </Stack>
+          {/* Top section with logo */}
+          <Box>
+            <Image
+              src="/images/insurancebuddy-logo-black.svg"
+              alt="InsuranceBuddy™"
+              width={210}
+              height={28}
+            />
+          </Box>
 
           {/* Middle section with navigation links */}
           <Stack direction="row" spacing={3} flexWrap="wrap">

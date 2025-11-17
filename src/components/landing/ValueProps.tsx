@@ -11,6 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import { TrendingUp, Folder } from "@mui/icons-material";
+import PatentBadge from "./PatentBadge";
 
 const valueProps = [
   {
@@ -292,36 +293,45 @@ export default function ValueProps() {
             boxShadow: "0 8px 24px rgba(38, 136, 227, 0.3)",
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{
-              fontSize: { xs: "1.25rem", md: "1.5rem" },
-              fontWeight: 700,
-              mb: 2,
-            }}
-          >
-            Don&apos;t believe us?
-          </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            href="#beta-signup"
-            sx={{
-              bgcolor: "white",
-              color: "primary.main",
-              fontWeight: 700,
-              fontSize: "1.1rem",
-              px: 4,
-              py: 1.5,
-              "&:hover": {
-                bgcolor: "grey.100",
-                transform: "scale(1.05)",
-              },
-              transition: "all 0.3s ease",
-            }}
-          >
-            Download for Free and See for Yourself
-          </Button>
+          <Stack spacing={2} alignItems="center">
+            <Typography
+              variant="h5"
+              sx={{
+                fontSize: { xs: "1.25rem", md: "1.5rem" },
+                fontWeight: 700,
+              }}
+            >
+              Don&apos;t believe us?
+            </Typography>
+            <PatentBadge
+              size="small"
+              sx={{
+                bgcolor: "rgba(255, 255, 255, 0.2)",
+                color: "white",
+                borderColor: "rgba(255, 255, 255, 0.3)",
+              }}
+            />
+            <Button
+              variant="contained"
+              size="large"
+              href="#beta-signup"
+              sx={{
+                bgcolor: "white",
+                color: "primary.main",
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                px: 4,
+                py: 1.5,
+                "&:hover": {
+                  bgcolor: "grey.100",
+                  transform: "scale(1.05)",
+                },
+                transition: "all 0.3s ease",
+              }}
+            >
+              Download for Free and See for Yourself
+            </Button>
+          </Stack>
         </Box>
       </Container>
     </Box>

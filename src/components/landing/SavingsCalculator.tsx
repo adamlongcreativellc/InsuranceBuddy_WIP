@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { TrendingUp, Savings, AttachMoney } from "@mui/icons-material";
 import { useState } from "react";
+import PatentBadge from "./PatentBadge";
 
 const incomeRanges = [
   { label: "$40,000", value: 40000, percentage: 20 },
@@ -71,6 +72,9 @@ export default function SavingsCalculator() {
               Most homes spend 18% of their pay on insurance—and don&apos;t even know it.
               See what you spend and what you could save.
             </Typography>
+            <Box sx={{ pt: 1 }}>
+              <PatentBadge size="small" />
+            </Box>
           </Stack>
 
           <Paper
