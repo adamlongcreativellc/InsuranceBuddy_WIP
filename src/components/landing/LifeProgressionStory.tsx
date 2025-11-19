@@ -1,21 +1,14 @@
 "use client";
 
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Grid,
-} from "@mui/material";
-import { Home, DirectionsCar, DirectionsBoat, RvHookup, TwoWheeler, Diamond } from "@mui/icons-material";
+import { Home, Car, Ship, Truck, Bike, Gem } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 // Life milestones with spending progression
 const lifeMilestones = [
   { age: 25, spending: 2500, events: [] },
-  { age: 35, spending: 12000, events: [{ icon: Home, label: "House" }, { icon: Diamond, label: "Married" }] },
-  { age: 45, spending: 25000, events: [{ icon: DirectionsCar, label: "Cars" }, { icon: DirectionsBoat, label: "Boat" }] },
-  { age: 59, spending: 40000, events: [{ icon: RvHookup, label: "RV" }, { icon: TwoWheeler, label: "Motorcycle" }] },
+  { age: 35, spending: 12000, events: [{ icon: Home, label: "House" }, { icon: Gem, label: "Married" }] },
+  { age: 45, spending: 25000, events: [{ icon: Car, label: "Cars" }, { icon: Ship, label: "Boat" }] },
+  { age: 59, spending: 40000, events: [{ icon: Truck, label: "RV" }, { icon: Bike, label: "Motorcycle" }] },
 ];
 
 export default function LifeProgressionStory() {
@@ -55,258 +48,130 @@ export default function LifeProgressionStory() {
     .flatMap((m) => m.events);
 
   return (
-    <Box
+    <section
       ref={containerRef}
       id="life-progression"
-      sx={{
-        py: { xs: 8, md: 12 },
-        bgcolor: "grey.50",
-      }}
+      className="py-20 md:py-32 bg-slate-50 relative overflow-hidden"
     >
-      <Container maxWidth="lg">
-        <Stack spacing={6}>
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-100/40 rounded-full blur-3xl -translate-x-1/2" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-secondary-100/40 rounded-full blur-3xl translate-x-1/2" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col gap-16">
           {/* Header */}
-          <Stack spacing={2} alignItems="center" textAlign="center">
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-              }}
-            >
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
               Real Folks, Real Shocks
-            </Typography>
-            <Typography
-              variant="h6"
-              color="text.secondary"
-              fontWeight={400}
-              sx={{ maxWidth: "700px" }}
-            >
+            </h2>
+            <p className="text-xl text-slate-600 font-medium">
               Watch how life adds up. Most folks have no idea how much they really spend.
-            </Typography>
-          </Stack>
+            </p>
+          </div>
 
           {/* Main Content - Split Layout */}
-          <Grid container spacing={4} alignItems="center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left: Age Timeline */}
-            <Grid size={{ xs: 12, md: 6 }} component="div">
-              <Box
-                sx={{
-                  position: "relative",
-                  py: 4,
-                }}
-              >
-                {/* Timeline line */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    left: 40,
-                    top: 60,
-                    bottom: 60,
-                    width: 4,
-                    bgcolor: "primary.light",
-                    borderRadius: 2,
-                  }}
-                />
+            <div className="relative py-8 pl-8 md:pl-12">
+              {/* Timeline line */}
+              <div className="absolute left-[43px] md:left-[59px] top-12 bottom-12 w-1 bg-primary-200 rounded-full" />
 
-                {/* Milestones */}
-                <Stack spacing={4}>
-                  {lifeMilestones.map((milestone, index) => (
-                    <Box
-                      key={milestone.age}
-                      sx={{
-                        position: "relative",
-                        pl: 10,
-                        opacity: index <= visibleIndex ? 1 : 0.3,
-                        transform: index <= visibleIndex ? "translateX(0)" : "translateX(-20px)",
-                        transition: "all 0.6s ease",
-                      }}
+              {/* Milestones */}
+              <div className="flex flex-col gap-12">
+                {lifeMilestones.map((milestone, index) => (
+                  <div
+                    key={milestone.age}
+                    className={`relative pl-12 transition-all duration-700 ease-out ${index <= visibleIndex
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-30 -translate-x-4"
+                      }`}
+                  >
+                    {/* Timeline dot */}
+                    <div
+                      className={`absolute left-0 top-2 w-6 h-6 rounded-full border-4 border-white transition-all duration-500 ${index <= visibleIndex
+                          ? "bg-primary-600 scale-125 shadow-[0_0_0_4px_rgba(37,99,235,0.2)]"
+                          : "bg-slate-300 scale-100"
+                        }`}
+                    />
+
+                    <h4
+                      className={`text-2xl font-bold mb-3 ${index <= visibleIndex ? "text-primary-700" : "text-slate-400"
+                        }`}
                     >
-                      {/* Timeline dot */}
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          left: 28,
-                          top: 8,
-                          width: 24,
-                          height: 24,
-                          borderRadius: "50%",
-                          bgcolor: index <= visibleIndex ? "primary.main" : "grey.300",
-                          border: "4px solid white",
-                          transition: "all 0.4s ease",
-                          boxShadow: index <= visibleIndex ? "0 2px 8px rgba(38, 136, 227, 0.4)" : "none",
-                        }}
-                      />
+                      Age {milestone.age}
+                    </h4>
 
-                      <Typography
-                        variant="h4"
-                        fontWeight={700}
-                        color={index <= visibleIndex ? "primary.main" : "text.secondary"}
-                        gutterBottom
-                      >
-                        Age {milestone.age}
-                      </Typography>
-
-                      {/* Life events icons */}
-                      {milestone.events.length > 0 && index <= visibleIndex && (
-                        <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                          {milestone.events.map((event, eventIndex) => (
-                            <Box
-                              key={eventIndex}
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 0.5,
-                                px: 1.5,
-                                py: 0.5,
-                                bgcolor: "primary.lighter",
-                                borderRadius: 1,
-                                fontSize: "0.875rem",
-                                color: "primary.main",
-                                opacity: 0,
-                                animation: `fadeIn 0.4s ease ${eventIndex * 0.2}s forwards`,
-                                "@keyframes fadeIn": {
-                                  to: { opacity: 1 },
-                                },
-                              }}
-                            >
-                              <event.icon sx={{ fontSize: 18 }} />
-                              <Typography variant="caption" fontWeight={600}>
-                                {event.label}
-                              </Typography>
-                            </Box>
-                          ))}
-                        </Stack>
-                      )}
-                    </Box>
-                  ))}
-                </Stack>
-              </Box>
-            </Grid>
+                    {/* Life events icons */}
+                    {milestone.events.length > 0 && index <= visibleIndex && (
+                      <div className="flex flex-wrap gap-3">
+                        {milestone.events.map((event, eventIndex) => (
+                          <div
+                            key={eventIndex}
+                            className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg shadow-sm border border-primary-100 text-primary-700 text-sm font-semibold animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-forwards"
+                            style={{ animationDelay: `${eventIndex * 200}ms` }}
+                          >
+                            <event.icon className="w-4 h-4" />
+                            <span>{event.label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
 
             {/* Right: Spending Counter */}
-            <Grid size={{ xs: 12, md: 6 }} component="div">
-              <Box
-                sx={{
-                  bgcolor: "white",
-                  p: { xs: 4, md: 6 },
-                  borderRadius: 3,
-                  border: "2px solid",
-                  borderColor: "primary.light",
-                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.08)",
-                  textAlign: "center",
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  gutterBottom
-                  fontWeight={400}
-                >
+            <div>
+              <div className="glass-card p-8 md:p-12 text-center transform transition-all duration-500 hover:shadow-2xl border-t-4 border-t-primary-500">
+                <p className="text-lg text-slate-500 font-medium mb-4 uppercase tracking-wider">
                   Insurance Spend Each Year
-                </Typography>
+                </p>
 
-                <Typography
-                  variant="h1"
-                  color="primary.main"
-                  fontWeight={700}
-                  sx={{
-                    fontSize: { xs: "3rem", md: "4rem" },
-                    my: 3,
-                    transition: "all 0.6s ease",
-                  }}
-                >
+                <div className="text-6xl md:text-7xl font-bold text-primary-600 mb-8 tracking-tight transition-all duration-500">
                   ${currentMilestone.spending.toLocaleString()}
-                </Typography>
+                </div>
 
                 {/* All collected life events displayed as icons */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                    gap: 2,
-                    mt: 4,
-                    minHeight: 60,
-                  }}
-                >
+                <div className="flex flex-wrap justify-center gap-3 min-h-[80px]">
                   {allVisibleEvents.map((event, index) => (
-                    <Box
+                    <div
                       key={index}
-                      sx={{
-                        width: 56,
-                        height: 56,
-                        borderRadius: "50%",
-                        bgcolor: "primary.lighter",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "primary.main",
-                        opacity: 0,
-                        animation: `popIn 0.4s ease ${index * 0.15}s forwards`,
-                        "@keyframes popIn": {
-                          "0%": { opacity: 0, transform: "scale(0.5)" },
-                          "60%": { transform: "scale(1.1)" },
-                          "100%": { opacity: 1, transform: "scale(1)" },
-                        },
-                      }}
+                      className="w-14 h-14 rounded-full bg-primary-50 flex items-center justify-center text-primary-600 animate-in zoom-in duration-300 fill-mode-forwards shadow-sm"
+                      style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <event.icon sx={{ fontSize: 32 }} />
-                    </Box>
+                      <event.icon className="w-7 h-7" />
+                    </div>
                   ))}
-                </Box>
+                </div>
 
                 {visibleIndex === lifeMilestones.length - 1 && (
-                  <Box
-                    sx={{
-                      mt: 4,
-                      pt: 4,
-                      borderTop: "1px solid",
-                      borderColor: "grey.200",
-                      opacity: 0,
-                      animation: "fadeIn 0.6s ease 0.5s forwards",
-                    }}
-                  >
-                    <Typography
-                      variant="h6"
-                      color="error.main"
-                      fontWeight={600}
-                      gutterBottom
-                    >
+                  <div className="mt-8 pt-8 border-t border-slate-100 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <p className="text-lg text-rose-500 font-bold mb-2">
                       Most folks guess: $10,000
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      color="text.secondary"
-                      fontWeight={400}
-                    >
-                      Real cost? <strong>${currentMilestone.spending.toLocaleString()}/year</strong>
-                    </Typography>
-                  </Box>
+                    </p>
+                    <p className="text-2xl text-slate-700">
+                      Real cost? <strong className="text-slate-900">${currentMilestone.spending.toLocaleString()}/year</strong>
+                    </p>
+                  </div>
                 )}
-              </Box>
-            </Grid>
-          </Grid>
+              </div>
+            </div>
+          </div>
 
           {/* Bottom CTA */}
-          <Box
-            sx={{
-              textAlign: "center",
-              p: 4,
-              bgcolor: "primary.lighter",
-              borderRadius: 2,
-              border: "1px solid",
-              borderColor: "primary.light",
-            }}
-          >
-            <Typography variant="h6" fontWeight={600} color="primary.main" gutterBottom>
+          <div className="bg-primary-50 rounded-2xl p-8 text-center border border-primary-100 max-w-2xl mx-auto">
+            <h3 className="text-xl font-bold text-primary-800 mb-2">
               Life adds up fast—but you don&apos;t have to guess.
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
+            </h3>
+            <p className="text-primary-700/80">
               Buddy shows you what you really spend. No advice, no judgment – just facts.
-            </Typography>
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

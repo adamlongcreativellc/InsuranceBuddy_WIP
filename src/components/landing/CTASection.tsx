@@ -1,7 +1,6 @@
 "use client";
 
-import { Box, Container, Typography, Stack, Button } from "@mui/material";
-import { ArrowForward } from "@mui/icons-material";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import EarlyAccessDialog from "./EarlyAccessDialog";
 
@@ -15,38 +14,22 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
   if (variant === "compact") {
     return (
       <>
-        <Box sx={{ py: { xs: 4, md: 6 }, textAlign: "center" }}>
-          <Container maxWidth="md">
-            <Box sx={{ display: "inline-block" }}>
-              <Button
-                variant="contained"
-                size="large"
-                endIcon={<ArrowForward />}
+        <section className="py-12 md:py-16 text-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="inline-block">
+              <button
                 onClick={() => setDialogOpen(true)}
-                sx={{
-                  px: 4,
-                  py: 1.5,
-                  fontSize: "1.1rem",
-                }}
+                className="group flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-full text-lg font-bold shadow-lg hover:bg-primary-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
                 Get Early Access
-              </Button>
-              <Typography
-                variant="caption"
-                sx={{
-                  display: "block",
-                  textAlign: "center",
-                  mt: 0.5,
-                  fontSize: "0.85rem",
-                  color: "success.main",
-                  fontWeight: 600,
-                }}
-              >
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <p className="mt-3 text-sm font-bold text-emerald-600">
                 100% Free • No Credit Card
-              </Typography>
-            </Box>
-          </Container>
-        </Box>
+              </p>
+            </div>
+          </div>
+        </section>
         <EarlyAccessDialog
           open={dialogOpen}
           onClose={() => setDialogOpen(false)}
@@ -57,63 +40,31 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
 
   return (
     <>
-      <Box
-        sx={{
-          py: { xs: 6, md: 8 },
-          textAlign: "center",
-          bgcolor: "grey.50",
-        }}
-      >
-        <Container maxWidth="md">
-          <Stack spacing={3} alignItems="center">
-            <Typography
-              variant="h4"
-              sx={{
-                fontSize: { xs: "1.75rem", sm: "2rem", md: "2.25rem" },
-                fontWeight: 700,
-              }}
-            >
+      <section className="py-20 md:py-32 bg-slate-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex flex-col gap-8 items-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
               Ready to See What You&apos;re Really Spending?
-            </Typography>
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{ maxWidth: "600px" }}
-            >
+            </h2>
+            <p className="text-xl text-slate-600 font-medium max-w-2xl">
               Join our beta and let Buddy help you track what you spend on insurance.
               Don&apos;t believe us? Download for free and see for yourself.
-            </Typography>
-            <Box sx={{ display: "inline-block" }}>
-              <Button
-                variant="contained"
-                size="large"
-                endIcon={<ArrowForward />}
+            </p>
+            <div className="inline-block">
+              <button
                 onClick={() => setDialogOpen(true)}
-                sx={{
-                  px: 4,
-                  py: 1.5,
-                  fontSize: "1.1rem",
-                }}
+                className="group flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-full text-lg font-bold shadow-lg hover:bg-primary-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
                 Get Early Access
-              </Button>
-              <Typography
-                variant="caption"
-                sx={{
-                  display: "block",
-                  textAlign: "center",
-                  mt: 0.5,
-                  fontSize: "0.85rem",
-                  color: "success.main",
-                  fontWeight: 600,
-                }}
-              >
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <p className="mt-3 text-sm font-bold text-emerald-600">
                 100% Free • No Credit Card
-              </Typography>
-            </Box>
-          </Stack>
-        </Container>
-      </Box>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       <EarlyAccessDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}

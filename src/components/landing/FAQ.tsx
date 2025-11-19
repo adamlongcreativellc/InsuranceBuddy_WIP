@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
-import { ExpandMore } from "@mui/icons-material";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const faqs = [
   {
@@ -55,68 +47,63 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  return (
-    <Box id="faq" sx={{ py: { xs: 8, md: 12 }, bgcolor: "grey.50" }}>
-      <Container maxWidth="md">
-        <Stack spacing={6}>
-          <Stack spacing={2} alignItems="center" textAlign="center">
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-              }}
-            >
-              Questions We Get a Lot
-            </Typography>
-            <Typography variant="h6" color="text.secondary" fontWeight={400}>
-              Everything you need to know about InsuranceBuddy
-            </Typography>
-          </Stack>
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-          <Stack spacing={2}>
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section id="faq" className="py-20 md:py-32 bg-slate-50">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-12">
+          <div className="text-center flex flex-col gap-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+              Questions We Get a Lot
+            </h2>
+            <p className="text-xl text-slate-600 font-medium">
+              Everything you need to know about InsuranceBuddy
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4">
             {faqs.map((faq, index) => (
-              <Accordion
+              <div
                 key={index}
-                elevation={0}
-                sx={{
-                  border: "1px solid",
-                  borderColor: "grey.200",
-                  borderRadius: 1,
-                  "&:before": {
-                    display: "none",
-                  },
-                  "&.Mui-expanded": {
-                    marginBottom: 0,
-                  },
-                }}
+                className={`
+                  bg-white rounded-2xl border transition-all duration-300 overflow-hidden
+                  ${openIndex === index
+                    ? "border-primary-500 shadow-lg"
+                    : "border-slate-200 hover:border-slate-300"
+                  }
+                `}
               >
-                <AccordionSummary
-                  expandIcon={<ExpandMore />}
-                  sx={{
-                    py: 1,
-                    "& .MuiAccordionSummary-content": {
-                      margin: "12px 0",
-                    },
-                  }}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                 >
-                  <Typography variant="h6" fontWeight={500}>
+                  <span className={`text-lg font-bold ${openIndex === index ? "text-primary-700" : "text-slate-900"}`}>
                     {faq.question}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ pt: 0 }}>
-                  <Typography
-                    variant="body1"
-                    color="text.secondary"
-                    lineHeight={1.8}
-                  >
+                  </span>
+                  <ChevronDown
+                    className={`w-6 h-6 text-slate-400 transition-transform duration-300 ${openIndex === index ? "rotate-180 text-primary-500" : ""}`}
+                  />
+                </button>
+                <div
+                  className={`
+                    transition-all duration-300 ease-in-out
+                    ${openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
+                  `}
+                >
+                  <div className="px-6 pb-6 text-slate-600 leading-relaxed">
                     {faq.answer}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
+                  </div>
+                </div>
+              </div>
             ))}
-          </Stack>
-        </Stack>
-      </Container>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

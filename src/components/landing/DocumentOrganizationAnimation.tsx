@@ -1,6 +1,5 @@
 "use client";
 
-import { Box, Container, Typography, Stack } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
@@ -92,11 +91,11 @@ export default function DocumentOrganizationAnimation() {
   const getDocumentStyle = (item: typeof documentItems[0]) => {
     // Progress from scattered (0) to centered (1)
     const progress = scrollProgress;
-    
+
     // Interpolate position from start to center (0, 0)
     const currentX = item.startX * (1 - progress);
     const currentY = item.startY * (1 - progress);
-    
+
     // Scale down as they converge - ending smaller so they go "behind" the logo
     const scale = 1 - progress * 0.8; // Scale from 1 to 0.2
 
@@ -111,358 +110,127 @@ export default function DocumentOrganizationAnimation() {
   };
 
   return (
-    <Box
+    <section
       ref={containerRef}
-      sx={{
-        minHeight: "130vh",
-        position: "relative",
-        py: 10,
-        mt: { xs: -12, md: -16 },
-        background: "transparent",
-        overflow: "hidden",
-      }}
+      className="min-h-[130vh] relative py-20 -mt-12 md:-mt-16 bg-transparent overflow-hidden"
     >
-      <Box
+      <div
         ref={pinRef}
-        sx={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        className="h-screen flex items-center justify-center"
       >
-        <Container maxWidth="lg">
-          <Stack spacing={4} alignItems="center" textAlign="center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="flex flex-col items-center text-center gap-8">
             {/* Header text */}
-            <Box
-              sx={{
-                opacity: 1,
-                position: "absolute",
-                top: { xs: 60, md: 80 },
-                left: 0,
-                right: 0,
-                zIndex: 20,
-              }}
-            >
-              <Typography
-                variant="h2"
-                sx={{
-                  fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-                  mb: 2,
-                  textShadow: "0 2px 8px rgba(255, 255, 255, 0.8)",
-                }}
-              >
+            <div className="absolute top-16 md:top-20 left-0 right-0 z-20 px-4">
+              <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm">
                 Your Insurance Plans Are All Over
-              </Typography>
-              <Typography
-                variant="h6"
-                color="text.secondary"
-                fontWeight={400}
-                sx={{
-                  maxWidth: "700px",
-                  mx: "auto",
-                  mb: 2,
-                  textShadow: "0 1px 4px rgba(255, 255, 255, 0.8)",
-                }}
-              >
+              </h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-4 font-medium">
                 File drawers, glove boxes, phones, computers, email—total chaos.
-              </Typography>
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 1.5 }}>
-                <PatentBadge size="small" />
-              </Box>
-            </Box>
+              </p>
+              <div className="flex justify-center mt-2">
+                <PatentBadge className="bg-white/50 backdrop-blur-sm" />
+              </div>
+            </div>
 
             {/* Animation container */}
-            <Box
-              sx={{
-                position: "relative",
-                width: "100%",
-                maxWidth: "1000px",
-                height: { xs: "500px", md: "600px" },
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <div className="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center">
               {/* Scattered documents */}
               {documentItems.map((item, index) => (
-                <Box
+                <div
                   key={index}
-                  sx={{
-                    position: "absolute",
-                    fontSize: { xs: "3rem", md: "4rem" },
-                    ...getDocumentStyle(item),
-                    willChange: "transform",
-                    pointerEvents: "none",
-                    userSelect: "none",
-                  }}
+                  className="absolute text-5xl md:text-6xl will-change-transform pointer-events-none select-none"
+                  style={getDocumentStyle(item)}
                   role="img"
                   aria-label={item.label}
                 >
                   {item.emoji}
-                </Box>
+                </div>
               ))}
 
               {/* Chaos messaging - floating questions */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: { xs: "15%", md: "20%" },
-                  left: { xs: "5%", md: "10%" },
-                  opacity: scrollProgress > 0.1 && scrollProgress < 0.35 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute top-[15%] md:top-[20%] left-[5%] md:left-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.1 && scrollProgress < 0.35 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Where did I put that policy?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: { xs: "68%", md: "70%" },
-                  right: { xs: "8%", md: "12%" },
-                  opacity: scrollProgress > 0.2 && scrollProgress < 0.45 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute top-[68%] md:top-[70%] right-[8%] md:right-[12%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.2 && scrollProgress < 0.45 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Was it in the car?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: { xs: "18%", md: "20%" },
-                  left: { xs: "8%", md: "15%" },
-                  opacity: scrollProgress > 0.15 && scrollProgress < 0.4 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute bottom-[18%] md:bottom-[20%] left-[8%] md:left-[15%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.15 && scrollProgress < 0.4 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Maybe the desk?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
               {/* Additional chaos questions */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: { xs: "10%", md: "15%" },
-                  right: { xs: "5%", md: "12%" },
-                  opacity: scrollProgress > 0.05 && scrollProgress < 0.3 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute top-[10%] md:top-[15%] right-[5%] md:right-[12%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.05 && scrollProgress < 0.3 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Did I scan that?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: { xs: "32%", md: "35%" },
-                  left: { xs: "3%", md: "8%" },
-                  opacity: scrollProgress > 0.18 && scrollProgress < 0.42 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute top-[32%] md:top-[35%] left-[3%] md:left-[8%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.18 && scrollProgress < 0.42 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Is it in my email?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: { xs: "50%", md: "52%" },
-                  right: { xs: "5%", md: "10%" },
-                  opacity: scrollProgress > 0.25 && scrollProgress < 0.48 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute top-[50%] md:top-[52%] right-[5%] md:right-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.25 && scrollProgress < 0.48 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Check the storage box?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: { xs: "8%", md: "10%" },
-                  right: { xs: "25%", md: "30%" },
-                  opacity: scrollProgress > 0.12 && scrollProgress < 0.38 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute bottom-[8%] md:bottom-[10%] right-[25%] md:right-[30%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.12 && scrollProgress < 0.38 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Which phone has it?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: { xs: "52%", md: "55%" },
-                  left: { xs: "5%", md: "10%" },
-                  opacity: scrollProgress > 0.22 && scrollProgress < 0.46 ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                  pointerEvents: "none",
-                }}
+              <div
+                className={`absolute top-[52%] md:top-[55%] left-[5%] md:left-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.22 && scrollProgress < 0.46 ? "opacity-100" : "opacity-0"
+                  }`}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.98)",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                    border: "1px solid rgba(0, 0, 0, 0.1)",
-                    fontStyle: "italic",
-                    color: "error.main",
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    fontWeight: 500,
-                  }}
-                >
+                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
                   &ldquo;Filing cabinet or desk?&rdquo;
-                </Typography>
-              </Box>
+                </div>
+              </div>
 
               {/* Center logo - Buddy (now moves to fetch documents!) */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  zIndex: 10,
-                  width: { xs: 160, md: 220 },
-                  height: { xs: 160, md: 220 },
-                  borderRadius: "50%",
-                  bgcolor: "primary.main",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: `0 8px 32px rgba(38, 136, 227, ${0.3 + scrollProgress * 0.4})`,
+              <div
+                className="absolute z-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-primary-600 flex items-center justify-center overflow-hidden will-change-transform"
+                style={{
+                  boxShadow: `0 8px 32px rgba(37, 99, 235, ${0.3 + scrollProgress * 0.4})`,
                   transform: `translate(${buddyPos.x}px, ${buddyPos.y}px) scale(${buddyPos.scale})`,
-                  willChange: "transform, box-shadow",
-                  overflow: "hidden",
                 }}
               >
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: "85%",
-                    height: "85%",
-                    filter: "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))",
-                  }}
-                >
+                <div className="relative w-[85%] h-[85%] drop-shadow-lg">
                   <Image
                     src="https://res.cloudinary.com/dzcrxivpm/image/upload/v1760720724/buddy_website_i9yk5a.webp"
                     alt="InsuranceBuddy Mascot"
@@ -470,84 +238,40 @@ export default function DocumentOrganizationAnimation() {
                     style={{ objectFit: "contain" }}
                     priority
                   />
-                </Box>
-              </Box>
-            </Box>
+                </div>
+              </div>
+            </div>
 
             {/* Bottom text - positioned absolutely to avoid overlap */}
-            <Box
-              sx={{
+            <div
+              className={`absolute bottom-20 md:bottom-24 left-0 right-0 z-20 transition-opacity duration-200 ${scrollProgress > 0.6 ? "opacity-100" : "opacity-0"
+                }`}
+              style={{
                 opacity: scrollProgress > 0.6 ? Math.min(1, (scrollProgress - 0.6) * 2.5) : 0,
-                transition: "opacity 0.2s ease",
-                position: "absolute",
-                bottom: { xs: 80, md: 100 },
-                left: 0,
-                right: 0,
-                zIndex: 20,
               }}
             >
-              <Typography
-                variant="h5"
-                color="primary.main"
-                fontWeight={700}
-                sx={{
-                  fontSize: { xs: "1.5rem", md: "2rem" },
-                  mb: 2,
-                  textShadow: "0 2px 8px rgba(255, 255, 255, 0.8)",
-                }}
-              >
+              <h3 className="text-3xl md:text-4xl font-bold text-primary-600 mb-3 drop-shadow-sm">
                 ✨ All Sorted in One Place
-              </Typography>
-              <Typography
-                variant="h6"
-                color="text.secondary"
-                fontWeight={400}
-                sx={{
-                  maxWidth: "700px",
-                  mx: "auto",
-                  textShadow: "0 1px 4px rgba(255, 255, 255, 0.8)",
-                }}
-              >
+              </h3>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
                 Buddy brings it all together—safe, sorted, and always there for you.
-              </Typography>
-            </Box>
-          </Stack>
-        </Container>
-      </Box>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Scroll indicator */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 60,
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: scrollProgress < 0.1 ? 1 : 0,
-          transition: "opacity 0.3s ease",
-        }}
+      <div
+        className={`absolute bottom-16 left-1/2 -translate-x-1/2 transition-opacity duration-300 ${scrollProgress < 0.1 ? "opacity-100" : "opacity-0"
+          }`}
       >
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 1,
-            animation: "bounce 2s infinite",
-            "@keyframes bounce": {
-              "0%, 100%": { transform: "translateY(0)" },
-              "50%": { transform: "translateY(-10px)" },
-            },
-          }}
-        >
+        <div className="flex flex-col items-center gap-2 text-slate-500 text-sm font-medium animate-bounce">
           Scroll to organize
-          <Box component="span" sx={{ fontSize: "1.5rem" }}>
-            ↓
-          </Box>
-        </Typography>
-      </Box>
-    </Box>
+          <span className="text-2xl">↓</span>
+        </div>
+      </div>
+    </section>
   );
 }
 

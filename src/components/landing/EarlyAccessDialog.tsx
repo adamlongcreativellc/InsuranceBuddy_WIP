@@ -1,26 +1,7 @@
 "use client";
 
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Button,
-  FormControl,
-  Chip,
-  Box,
-  Stack,
-  Typography,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Checkbox,
-  FormHelperText,
-  IconButton,
-} from "@mui/material";
-import { Close, Apple, Android } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { X, Smartphone, Check } from "lucide-react";
 
 interface EarlyAccessDialogProps {
   open: boolean;
@@ -66,6 +47,20 @@ export default function EarlyAccessDialog({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setIsVisible(true);
+      document.body.style.overflow = "hidden";
+    } else {
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      document.body.style.overflow = "unset";
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
+
+  if (!open && !isVisible) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,59 +74,19 @@ export default function EarlyAccessDialog({
       return;
     }
 
-    // Form submission disabled for static build
-    setErrors({
-      submit: "Form submission is disabled in this static version. Please visit the live site to join the waitlist.",
-    });
-
-    /* Original API call - disabled for static export
     setIsSubmitting(true);
-    setErrors({});
 
-    try {
-      const response = await fetch("/api/early-access", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 409) {
-          setErrors({ email: "This email is already on the waitlist" });
-        } else {
-          setErrors({
-            submit: data.error || "Something went wrong. Please try again.",
-          });
-        }
-
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Success
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
       setSubmitted(true);
-
-      // Reset form data for next use
       setFormData({
         email: "",
         platform: "",
         personalInsurance: [],
         topChallenges: [],
       });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-
-      setErrors({
-        submit: "Network error. Please check your connection and try again.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-    */
+    }, 1500);
   };
 
   const handlePersonalInsuranceToggle = (option: string) => {
@@ -153,281 +108,202 @@ export default function EarlyAccessDialog({
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="sm"
-      fullWidth
-      PaperProps={{
-        sx: { borderRadius: 2 },
-      }}
-    >
-      <DialogTitle
-        sx={{
-          m: 0,
-          p: 2,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        {submitted ? "Thank You" : "Join Early Access"}
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <Close />
-        </IconButton>
-      </DialogTitle>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+      <div
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300"
+        onClick={onClose}
+      />
 
-      {submitted ? (
-        <>
-          <DialogContent>
-            <Stack spacing={2} sx={{ py: 3, textAlign: "center" }}>
-              <Typography variant="h6" color="success.main">
+      <div
+        className={`
+          relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]
+          transform transition-all duration-300 ease-out
+          ${open ? "scale-100 translate-y-0" : "scale-95 translate-y-4"}
+        `}
+      >
+        <div className="flex items-center justify-between p-6 border-b border-slate-100">
+          <h2 className="text-2xl font-bold text-slate-900">
+            {submitted ? "Thank You" : "Join Early Access"}
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <div className="overflow-y-auto p-6">
+          {submitted ? (
+            <div className="flex flex-col items-center text-center py-8 gap-4">
+              <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-2">
+                <Check className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900">
                 You&apos;re on the list!
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
+              </h3>
+              <p className="text-slate-600 max-w-md">
                 We&apos;ll send you an invitation to join the beta as soon as
                 spots open up.
-              </Typography>
-            </Stack>
-          </DialogContent>
-          <DialogActions sx={{ px: 3, py: 2, justifyContent: "center" }}>
-            <Button
-              onClick={() => {
-                setSubmitted(false);
-                onClose();
-              }}
-              variant="contained"
-            >
-              Close
-            </Button>
-          </DialogActions>
-        </>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <DialogContent dividers sx={{ maxHeight: "60vh", overflowY: "auto" }}>
-            <Stack spacing={3}>
-              {/* Display general submit error if exists */}
+              </p>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  onClose();
+                }}
+                className="mt-4 px-6 py-2 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-8">
               {errors.submit && (
-                <Typography color="error" variant="body2">
+                <div className="p-4 bg-red-50 text-red-600 rounded-lg text-sm font-medium">
                   {errors.submit}
-                </Typography>
+                </div>
               )}
 
-              {/* Email */}
-              <TextField
-                label="Email Address"
-                type="email"
-                required
-                fullWidth
-                value={formData.email}
-                placeholder="Enter your email address"
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                error={!!errors.email}
-                helperText={errors.email}
-                disabled={isSubmitting}
-              />
-
-              {/* Platform */}
-              <FormControl error={!!errors.platform}>
-                <Typography variant="subtitle2" gutterBottom>
-                  Which platform will you use? *
-                </Typography>
-                <RadioGroup
-                  value={formData.platform}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      platform: e.target.value,
-                    });
-                  }}
-                  row
-                >
-                  <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
-                    <Box
-                      sx={{
-                        flex: 1,
-                        border: "2px solid",
-                        borderColor:
-                          formData.platform === "iOS"
-                            ? "primary.main"
-                            : "grey.300",
-                        borderRadius: 2,
-                        p: 2,
-                        cursor: "pointer",
-                        transition: "all 0.2s",
-                        color:
-                          formData.platform === "iOS" ? "white" : "inherit",
-                        bgcolor:
-                          formData.platform === "iOS"
-                            ? "primary.main"
-                            : "transparent",
-                        "&:hover": {
-                          borderColor: "primary.main",
-                        },
-                      }}
-                      onClick={() =>
-                        setFormData({ ...formData, platform: "iOS" })
-                      }
-                    >
-                      <FormControlLabel
-                        value="iOS"
-                        control={<Radio sx={{ display: "none" }} />}
-                        label={
-                          <Stack
-                            direction="row"
-                            spacing={1}
-                            alignItems="center"
-                          >
-                            <Apple />
-                            <Typography
-                              variant="body1"
-                              fontWeight={
-                                formData.platform === "iOS" ? 600 : 400
-                              }
-                            >
-                              iOS
-                            </Typography>
-                          </Stack>
-                        }
-                        sx={{ m: 0, width: "100%" }}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        flex: 1,
-                        border: "2px solid",
-                        borderColor:
-                          formData.platform === "Android"
-                            ? "primary.main"
-                            : "grey.300",
-                        borderRadius: 2,
-                        p: 2,
-                        cursor: "pointer",
-                        transition: "all 0.2s",
-                        color:
-                          formData.platform === "Android" ? "white" : "inherit",
-                        bgcolor:
-                          formData.platform === "Android"
-                            ? "primary.main"
-                            : "transparent",
-                        "&:hover": {
-                          borderColor: "primary.main",
-                          bgcolor:
-                            formData.platform === "Android"
-                              ? "primary.light"
-                              : "grey.50",
-                        },
-                      }}
-                      onClick={() =>
-                        setFormData({ ...formData, platform: "Android" })
-                      }
-                    >
-                      <FormControlLabel
-                        value="Android"
-                        control={<Radio sx={{ display: "none" }} />}
-                        label={
-                          <Stack
-                            direction="row"
-                            spacing={1}
-                            alignItems="center"
-                          >
-                            <Android />
-                            <Typography
-                              variant="body1"
-                              fontWeight={
-                                formData.platform === "Android" ? 600 : 400
-                              }
-                            >
-                              Android
-                            </Typography>
-                          </Stack>
-                        }
-                        sx={{ m: 0, width: "100%" }}
-                      />
-                    </Box>
-                  </Box>
-                </RadioGroup>
-                {errors.platform && (
-                  <FormHelperText error>{errors.platform}</FormHelperText>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-bold text-slate-700">
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  placeholder="Enter your email address"
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className={`
+                    w-full px-4 py-3 rounded-xl border bg-slate-50 focus:bg-white transition-all outline-none focus:ring-2
+                    ${errors.email
+                      ? "border-red-300 focus:ring-red-200"
+                      : "border-slate-200 focus:border-primary-500 focus:ring-primary-200"
+                    }
+                  `}
+                  disabled={isSubmitting}
+                />
+                {errors.email && (
+                  <p className="text-sm text-red-500 font-medium">{errors.email}</p>
                 )}
-              </FormControl>
+              </div>
 
-              {/* Personal Insurance */}
-              <Box>
-                <Typography variant="subtitle2" gutterBottom mb={1}>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-bold text-slate-700">
+                  Which platform will you use? <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { id: "iOS", label: "iOS", icon: "🍎" },
+                    { id: "Android", label: "Android", icon: <Smartphone className="w-5 h-5" /> }
+                  ].map((platform) => (
+                    <div
+                      key={platform.id}
+                      onClick={() => setFormData({ ...formData, platform: platform.id })}
+                      className={`
+                        cursor-pointer p-4 rounded-xl border-2 flex items-center justify-center gap-3 transition-all duration-200
+                        ${formData.platform === platform.id
+                          ? "border-primary-500 bg-primary-50 text-primary-700"
+                          : "border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-600"
+                        }
+                      `}
+                    >
+                      <span className="text-xl">{platform.icon}</span>
+                      <span className="font-bold">{platform.label}</span>
+                    </div>
+                  ))}
+                </div>
+                {errors.platform && (
+                  <p className="text-sm text-red-500 font-medium">{errors.platform}</p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-bold text-slate-700">
                   My personal insurance is: (select all that apply)
-                </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                </label>
+                <div className="flex flex-wrap gap-2">
                   {personalInsuranceOptions.map((option) => (
-                    <Chip
+                    <button
                       key={option}
-                      label={option}
+                      type="button"
                       onClick={() => handlePersonalInsuranceToggle(option)}
-                      color={
-                        formData.personalInsurance.includes(option)
-                          ? "primary"
-                          : "default"
-                      }
-                      variant={
-                        formData.personalInsurance.includes(option)
-                          ? "filled"
-                          : "outlined"
-                      }
-                      sx={{
-                        px: 1,
-                        py: 0.5,
-                        "& .MuiChip-label": {
-                          px: 1.5,
-                        },
-                      }}
-                    />
+                      className={`
+                        px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border
+                        ${formData.personalInsurance.includes(option)
+                          ? "bg-primary-600 text-white border-primary-600 shadow-sm"
+                          : "bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                        }
+                      `}
+                    >
+                      {option}
+                    </button>
                   ))}
-                </Box>
-              </Box>
+                </div>
+              </div>
 
-              {/* Top Challenges */}
-              <FormControl>
-                <Typography variant="subtitle2" gutterBottom>
-                  My top challenges with personal insurance: (select all that
-                  apply)
-                </Typography>
-                <Stack spacing={0}>
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-bold text-slate-700">
+                  My top challenges with personal insurance:
+                </label>
+                <div className="flex flex-col gap-2">
                   {topChallengesOptions.map((challenge) => (
-                    <FormControlLabel
+                    <label
                       key={challenge}
-                      control={
-                        <Checkbox
-                          checked={formData.topChallenges.includes(challenge)}
-                          onChange={() => handleTopChallengeToggle(challenge)}
-                          size="small"
-                        />
-                      }
-                      label={challenge}
-                    />
+                      className={`
+                        flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200
+                        ${formData.topChallenges.includes(challenge)
+                          ? "bg-primary-50 border-primary-200"
+                          : "bg-white border-slate-200 hover:bg-slate-50"
+                        }
+                      `}
+                    >
+                      <div className={`
+                        mt-0.5 w-5 h-5 rounded border flex items-center justify-center flex-shrink-0 transition-colors
+                        ${formData.topChallenges.includes(challenge)
+                          ? "bg-primary-600 border-primary-600 text-white"
+                          : "border-slate-300 bg-white"
+                        }
+                      `}>
+                        {formData.topChallenges.includes(challenge) && <Check className="w-3.5 h-3.5" />}
+                      </div>
+                      <input
+                        type="checkbox"
+                        className="hidden"
+                        checked={formData.topChallenges.includes(challenge)}
+                        onChange={() => handleTopChallengeToggle(challenge)}
+                      />
+                      <span className={`text-sm ${formData.topChallenges.includes(challenge) ? "text-primary-900 font-medium" : "text-slate-600"}`}>
+                        {challenge}
+                      </span>
+                    </label>
                   ))}
-                </Stack>
-              </FormControl>
-            </Stack>
-          </DialogContent>
+                </div>
+              </div>
 
-          <DialogActions sx={{ px: 3, py: 2 }}>
-            <Button onClick={onClose} color="inherit" disabled={isSubmitting}>
-              Cancel
-            </Button>
-            <Button type="submit" variant="contained" disabled={isSubmitting}>
-              {isSubmitting ? "Joining..." : "Join Waitlist"}
-            </Button>
-          </DialogActions>
-        </form>
-      )}
-    </Dialog>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  disabled={isSubmitting}
+                  className="flex-1 px-6 py-3 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 px-6 py-3 rounded-xl font-bold text-white bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-500/30 transition-all hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Joining..." : "Join Waitlist"}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

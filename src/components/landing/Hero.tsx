@@ -1,8 +1,7 @@
 "use client";
 
-import { Box, Container, Typography, Button, Stack, Grid } from "@mui/material";
-import { ArrowForward } from "@mui/icons-material";
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import EarlyAccessDialog from "./EarlyAccessDialog";
 import PatentBadge from "./PatentBadge";
 import { handleSmoothScroll } from "@/utils/smoothScroll";
@@ -11,212 +10,119 @@ export default function Hero() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <Box
-      sx={{
-        background: "linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 100%)",
-        pt: { xs: 12, md: 16 },
-        pb: { xs: 4, md: 4 },
-      }}
-    >
-      <Container maxWidth="lg">
-        <Grid container spacing={4} alignItems="center">
-          <Grid size={{ xs: 12, md: 8 }} component="div">
-            <Stack spacing={4}>
-              <Typography
-                variant="h1"
-                sx={{
-                  fontSize: { xs: "2.5rem", sm: "3rem", md: "3.5rem" },
-                  textAlign: { xs: "center", md: "left" },
-                  lineHeight: 1.2,
-                  pt: 0,
-                  maxWidth: { md: "900px" },
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Do You Know What <br />
-                You&apos;re{" "}
-                <Box
-                  component="span"
-                  sx={{
-                    position: "relative",
-                    display: "inline-block",
-                    paddingBottom: "8px",
-                  }}
-                >
-                  Really
-                  <Box
-                    component="svg"
-                    sx={{
-                      position: "absolute",
-                      left: "-8px",
-                      right: "-8px",
-                      bottom: "0",
-                      width: "calc(100% + 16px)",
-                      height: "16px",
-                    }}
-                    viewBox="0 0 120 12"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M2,9 C10,8 15,10 25,8.5 C35,7 42,9.5 52,7.5 C62,6 70,8 80,6 C90,4.5 98,6 108,4 C112,3.5 116,3 118,2.5"
-                      stroke="#2688E3"
-                      strokeWidth="2.5"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      style={{ filter: 'url(#roughness)' }}
-                    />
-                    <defs>
-                      <filter id="roughness">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" seed="2"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.8" xChannelSelector="R" yChannelSelector="G"/>
-                      </filter>
-                    </defs>
-                  </Box>
-                </Box>{" "}
-                Spending <br />
-                on Insurance?
-              </Typography>
+    <section className="relative pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary-100/50 rounded-full blur-3xl opacity-60 animate-float-slow" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-secondary-100/40 rounded-full blur-3xl opacity-50 animate-float" />
+      </div>
 
-              <Box sx={{ mt: 2, display: { xs: "flex", md: "block" }, justifyContent: { xs: "center", md: "flex-start" } }}>
-                <PatentBadge />
-              </Box>
-
-              <Typography
-                variant="h5"
-                color="text.secondary"
-                sx={{
-                  fontSize: { xs: "1.1rem", sm: "1.25rem" },
-                  fontWeight: 400,
-                  textAlign: { xs: "center", md: "left" },
-                }}
-              >
-                Most folks don&apos;t know what they spend on insurance. Buddy shows you
-                the real number. He finds all your lost plans and puts them in one safe spot.
-              </Typography>
-
-              <Stack
-                direction={{ xs: "column", sm: "row" }}
-                spacing={2}
-                sx={{ mt: 3 }}
-              >
-                <Box sx={{ position: "relative", display: "inline-block" }}>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    endIcon={<ArrowForward />}
-                    onClick={() => setDialogOpen(true)}
-                    sx={{
-                      px: 4,
-                      py: 1.5,
-                      fontSize: "1.1rem",
-                    }}
-                  >
-                    Get Early Access
-                  </Button>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      display: "block",
-                      textAlign: "center",
-                      mt: 0.5,
-                      fontSize: "0.85rem",
-                      color: "success.main",
-                      fontWeight: 600,
-                    }}
-                  >
-                    100% Free • No Credit Card
-                  </Typography>
-                </Box>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  onClick={(e) => handleSmoothScroll(e, "#how-it-works")}
-                  sx={{
-                    px: 4,
-                    py: 1.5,
-                    fontSize: "1.1rem",
-                  }}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Text Content */}
+          <div className="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-slate-900">
+              Do You Know What <br />
+              You&apos;re{" "}
+              <span className="relative inline-block">
+                Really
+                <svg
+                  className="absolute left-0 right-0 -bottom-2 w-full h-4 text-primary-500"
+                  viewBox="0 0 120 12"
+                  preserveAspectRatio="none"
                 >
-                  See How It Works
-                </Button>
-              </Stack>
-            </Stack>
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }} component="div">
-            <Box
-              sx={{
-                position: "relative",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
-              }}
-            >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                style={{
-                  width: "110%",
-                  height: "auto",
-                  maxWidth: "660px",
-                  backgroundColor: "transparent",
-                  filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15))",
-                }}
-              >
-                <source
-                  src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1/buddyanimate_rokrov.webm"
-                  type='video/webm; codecs="vp8, vorbis"'
-                />
-              </video>
-            </Box>
-          </Grid>
-        </Grid>
-        <Stack spacing={2} sx={{ mt: { xs: 8, sm: 2 } }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box sx={{ display: "flex", mr: 2 }}>
-              {[1, 2, 3, 4].map((i) => (
-                <Box
-                  key={i}
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                    bgcolor: `grey.${300 + i * 100}`,
-                    border: "2px solid white",
-                    ml: i > 1 ? -1.5 : 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "0.9rem",
-                    color: "white",
-                    fontWeight: 600,
-                  }}
+                  <path
+                    d="M2,9 C10,8 15,10 25,8.5 C35,7 42,9.5 52,7.5 C62,6 70,8 80,6 C90,4.5 98,6 108,4 C112,3.5 116,3 118,2.5"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>{" "}
+              Spending <br />
+              on Insurance?
+            </h1>
+
+            <div className="flex justify-center lg:justify-start">
+              <PatentBadge />
+            </div>
+
+            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-medium">
+              InsuranceBuddy™ is your faithful companion that finally reveals how much you&apos;re really spending on insurance and organizes all your scattered policies into one secure place.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mt-4 justify-center lg:justify-start">
+              <div className="flex flex-col items-center sm:items-start">
+                <button
+                  onClick={() => setDialogOpen(true)}
+                  className="group relative px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-primary-500/30 transition-all duration-300 flex items-center gap-2"
                 >
-                  {String.fromCharCode(65 + i - 1)}
-                </Box>
-              ))}
-            </Box>
-            <Typography
-              variant="body2"
-              sx={{
-                color: "text.secondary",
-                fontWeight: 500,
-              }}
-            >
-              Join our beta
-            </Typography>
-          </Box>
-        </Stack>
-      </Container>
+                  Get Early Access
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <span className="text-sm text-green-600 font-semibold mt-2">
+                  100% Free • No Credit Card
+                </span>
+              </div>
+
+              <button
+                onClick={(e) => handleSmoothScroll(e, "#how-it-works")}
+                className="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-lg font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                See How It Works
+              </button>
+            </div>
+
+            {/* Social Proof / Beta Users */}
+            <div className="flex items-center justify-center lg:justify-start gap-3 mt-4">
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500"
+                  >
+                    {String.fromCharCode(64 + i)}
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm font-medium text-slate-600">
+                Join our beta community
+              </p>
+            </div>
+          </div>
+
+          {/* Video/Visual Content */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+              {/* Decorative blob behind video */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary-200 to-secondary-200 rounded-full blur-3xl opacity-30 animate-pulse-glow" />
+
+              <div className="relative z-10 w-full h-full flex items-center justify-center">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-[120%] max-w-none drop-shadow-2xl"
+                  style={{ background: 'transparent' }}
+                >
+                  <source
+                    src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1/buddyanimate_rokrov.webm"
+                    type='video/webm; codecs="vp8, vorbis"'
+                  />
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <EarlyAccessDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
       />
-    </Box>
+    </section>
   );
 }

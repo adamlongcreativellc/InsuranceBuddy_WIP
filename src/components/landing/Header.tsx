@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowForward } from "@mui/icons-material";
-import { AppBar, Toolbar, Button, Box, Container, Stack } from "@mui/material";
+import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { handleSmoothScroll } from "@/utils/smoothScroll";
 import EarlyAccessDialog from "./EarlyAccessDialog";
@@ -35,91 +34,63 @@ export default function Header() {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        elevation={0}
-        sx={{
-          bgcolor: "primary.main",
-          transition: "all 0.3s ease",
-          boxShadow: scrolled ? 3 : 1,
-        }}
+      <header
+        className={`
+          fixed top-0 left-0 right-0 z-50 transition-all duration-300
+          ${scrolled
+            ? "bg-primary-600/95 backdrop-blur-md shadow-lg py-3"
+            : "bg-primary-600 py-4"
+          }
+        `}
       >
-        <Container maxWidth="lg">
-          <Toolbar sx={{ px: "0 !important", py: 1 }}>
-            <Stack direction="row" alignItems="center" spacing={1.5}>
-              <Link href="/" style={{ cursor: "pointer" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Link href="/" className="cursor-pointer">
                 <Image
                   src="/images/insurancebuddy-logo-white.svg"
                   alt="InsuranceBuddy™"
                   width={220}
                   height={32}
-                  style={{ marginTop: "4px" }}
+                  className="h-8 w-auto"
                 />
               </Link>
-              <Box sx={{ mt: "4px" }}>
-                <PatentBadge
-                  size="small"
-                  sx={{
-                    bgcolor: "rgba(255, 255, 255, 0.2)",
-                    color: "white",
-                    borderColor: "rgba(255, 255, 255, 0.3)",
-                  }}
-                />
-              </Box>
-            </Stack>
+              <div className="hidden sm:block">
+                <PatentBadge size="small" />
+              </div>
+            </div>
 
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: { xs: "none", md: "flex" },
-                justifyContent: "center",
-                gap: 4,
-              }}
-            >
+            <nav className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
-                <Link
+                <a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleSmoothScroll(e, item.href)}
-                  style={{
-                    color: "white",
-                    fontWeight: 500,
-                    cursor: "pointer",
-                    textDecoration: "none",
-                    transition: "opacity 0.2s",
-                  }}
+                  className="text-white/90 hover:text-white font-medium transition-colors text-sm"
                 >
                   {item.label}
-                </Link>
+                </a>
               ))}
-            </Box>
+            </nav>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }} />
-
-            <Button
-              variant="contained"
-              endIcon={
-                <Box sx={{ display: { xs: "none", sm: "inline-flex" } }}>
-                  <ArrowForward style={{ fontSize: "1.2rem" }} />
-                </Box>
-              }
+            <button
               onClick={() => setDialogOpen(true)}
-              sx={{
-                ml: 2,
-                px: { xs: 1, sm: 3 },
-                bgcolor: "white",
-                color: "primary.main",
-                width: { xs: "140px", sm: "auto" },
-                "&:hover": {
-                  bgcolor: "grey.100",
-                },
-              }}
+              className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-white text-primary-600 rounded-full text-sm font-bold shadow-md hover:shadow-lg hover:bg-slate-50 transition-all duration-300"
             >
               Get Early Access
-            </Button>
-          </Toolbar>
-        </Container>
-      </AppBar>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            {/* Mobile menu button placeholder - can be expanded if needed */}
+            <button
+              onClick={() => setDialogOpen(true)}
+              className="md:hidden px-4 py-2 bg-white text-primary-600 rounded-full text-sm font-bold shadow-sm"
+            >
+              Join Beta
+            </button>
+          </div>
+        </div>
+      </header>
 
       <EarlyAccessDialog
         open={dialogOpen}

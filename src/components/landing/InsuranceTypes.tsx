@@ -1,19 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { CheckCircle } from "@mui/icons-material";
+import { CheckCircle } from "lucide-react";
 import PatentBadge from "./PatentBadge";
 
 const insuranceTypes = [
@@ -34,127 +21,52 @@ const insuranceTypes = [
 
 export default function InsuranceTypes() {
   return (
-    <Box
-      sx={{
-        py: { xs: 8, md: 12 },
-        bgcolor: "grey.50",
-      }}
-    >
-      <Container maxWidth="md">
-        <Stack spacing={6}>
-          <Stack spacing={2} alignItems="center" textAlign="center">
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-              }}
-            >
+    <section className="py-20 md:py-32 bg-slate-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-12">
+          <div className="text-center max-w-3xl mx-auto flex flex-col gap-6 items-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
               You Have More Policies Than You Think
-            </Typography>
-            <Typography
-              variant="h6"
-              color="text.secondary"
-              fontWeight={400}
-              sx={{ maxWidth: "700px" }}
-            >
+            </h2>
+            <p className="text-xl text-slate-600 font-medium">
               Most folks forget about plans they&apos;ve picked up over the years.
               How many do you have?
-            </Typography>
-            <Box sx={{ mt: 2 }}>
-              <PatentBadge />
-            </Box>
-          </Stack>
+            </p>
+            <PatentBadge />
+          </div>
 
-          <TableContainer
-            component={Paper}
-            elevation={2}
-            sx={{
-              borderRadius: 3,
-              overflow: "hidden",
-            }}
-          >
-            <Table>
-              <TableHead>
-                <TableRow sx={{ bgcolor: "primary.main" }}>
-                  <TableCell
-                    sx={{
-                      color: "white",
-                      fontWeight: 700,
-                      fontSize: "1.1rem",
-                      py: 2,
-                    }}
-                  >
-                    Insurance Type
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    sx={{
-                      color: "white",
-                      fontWeight: 700,
-                      fontSize: "1.1rem",
-                      py: 2,
-                    }}
-                  >
-                    Do You Have This?
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {insuranceTypes.map((insurance, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{
-                      "&:nth-of-type(odd)": {
-                        bgcolor: "grey.50",
-                      },
-                      "&:hover": {
-                        bgcolor: "primary.lighter",
-                      },
-                      transition: "background-color 0.2s ease",
-                    }}
-                  >
-                    <TableCell
-                      sx={{
-                        fontSize: "1rem",
-                        fontWeight: insurance.common ? 600 : 400,
-                        py: 2.5,
-                      }}
-                    >
-                      {insurance.name}
-                    </TableCell>
-                    <TableCell align="center">
-                      <CheckCircle
-                        sx={{
-                          color: "success.main",
-                          fontSize: 32,
-                          opacity: 0.8,
-                        }}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+            <div className="bg-primary-600 px-6 py-4 grid grid-cols-12 gap-4 text-white font-bold text-lg">
+              <div className="col-span-8 md:col-span-9">Insurance Type</div>
+              <div className="col-span-4 md:col-span-3 text-center">Do You Have This?</div>
+            </div>
+            <div className="divide-y divide-slate-100">
+              {insuranceTypes.map((insurance, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-12 gap-4 px-6 py-4 items-center hover:bg-primary-50/50 transition-colors duration-200"
+                >
+                  <div className={`col-span-8 md:col-span-9 text-lg ${insurance.common ? "font-semibold text-slate-900" : "text-slate-600"}`}>
+                    {insurance.name}
+                  </div>
+                  <div className="col-span-4 md:col-span-3 flex justify-center">
+                    <div className="w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center group cursor-pointer hover:border-primary-500 hover:bg-primary-50 transition-all">
+                      <CheckCircle className="w-5 h-5 text-slate-300 group-hover:text-primary-500 transition-colors" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <Paper
-            elevation={0}
-            sx={{
-              p: 4,
-              borderRadius: 2,
-              bgcolor: "primary.lighter",
-              border: "1px solid",
-              borderColor: "primary.light",
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h6" fontWeight={600} color="primary.main">
+          <div className="bg-primary-50 rounded-2xl p-8 text-center border border-primary-100">
+            <h3 className="text-xl font-bold text-primary-800">
               Buddy helps you track all of them in one place
-            </Typography>
-          </Paper>
-        </Stack>
-      </Container>
-    </Box>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

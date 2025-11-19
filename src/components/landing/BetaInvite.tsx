@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Button,
-  Paper,
-} from "@mui/material";
-import { ArrowForward } from "@mui/icons-material";
+import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import EarlyAccessDialog from "./EarlyAccessDialog";
 
@@ -31,59 +23,43 @@ export default function BetaInvite() {
   }, []);
 
   return (
-    <Box
+    <section
       id="waitlist"
-      sx={{
-        py: { xs: 8, md: 12 },
-        background: "linear-gradient(135deg, #2688E3 0%, #1B6BB8 100%)",
-      }}
+      className="py-20 md:py-32 bg-gradient-to-br from-primary-600 to-primary-800 relative overflow-hidden"
     >
-      <Container maxWidth="md">
-        <Paper
-          elevation={3}
-          sx={{
-            p: { xs: 4, md: 6 },
-            borderRadius: 3,
-            textAlign: "center",
-          }}
-        >
-          <Stack spacing={4} alignItems="center">
-            <Stack spacing={2}>
-              <Typography
-                variant="h3"
-                sx={{
-                  fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.5rem" },
-                  fontWeight: 700,
-                }}
-              >
-                Join the Beta
-              </Typography>
-              <Typography variant="h6" color="text.secondary" fontWeight={400}>
-                {copyText}
-              </Typography>
-            </Stack>
+      {/* Background decorations */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl" />
+      </div>
 
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<ArrowForward />}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="glass-card p-8 md:p-12 text-center border-none bg-white/10 backdrop-blur-md shadow-2xl">
+          <div className="flex flex-col gap-8 items-center">
+            <div className="flex flex-col gap-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+                Join the Beta
+              </h2>
+              <p className="text-xl text-primary-100 font-medium max-w-2xl mx-auto">
+                {copyText}
+              </p>
+            </div>
+
+            <button
               onClick={() => setDialogOpen(true)}
-              sx={{
-                px: 4,
-                py: 1.5,
-                fontSize: "1.1rem",
-              }}
+              className="group flex items-center gap-3 px-8 py-4 bg-white text-primary-700 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               Join the Waitlist
-            </Button>
-          </Stack>
-        </Paper>
-      </Container>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
 
       <EarlyAccessDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
       />
-    </Box>
+    </section>
   );
 }
