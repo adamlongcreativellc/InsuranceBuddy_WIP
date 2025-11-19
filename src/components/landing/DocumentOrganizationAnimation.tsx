@@ -120,20 +120,35 @@ export default function DocumentOrganizationAnimation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 w-full flex flex-col items-center">
 
           {/* Header text */}
-          <div className="absolute top-16 md:top-20 left-0 right-0 z-20 px-4 text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm">
-              Do you know where all your <br></br> insurance docs are?
-            </h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-4 font-medium">
-              File drawers, glove boxes, phones, computers, email—total chaos.
-            </p>
-            <div className="flex justify-center mt-2">
+          <div className="absolute top-16 md:top-20 left-0 right-0 z-20 px-4 flex flex-col items-center">
+            <div className="relative p-6 md:p-8 max-w-4xl w-full text-center rounded-3xl border border-white/40 shadow-2xl overflow-hidden">
+              {/* Background Blobs */}
+              <div className="absolute inset-0 z-0">
+                <div className="absolute top-0 -left-4 w-48 h-48 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob"></div>
+                <div className="absolute top-0 -right-4 w-48 h-48 bg-[#00c088] rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob animation-delay-2000"></div>
+                <div className="absolute -bottom-8 left-20 w-48 h-48 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob animation-delay-4000"></div>
+              </div>
+
+              {/* Glass Overlay */}
+              <div className="absolute inset-0 z-10 bg-white/10 backdrop-blur-xl"></div>
+
+              {/* Content */}
+              <div className="relative z-20">
+                <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm">
+                  Do you know where all your <br></br> insurance docs are?
+                </h2>
+                <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-0 font-medium">
+                  File drawers, glove boxes, phones, computers, email—total chaos.
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-center mt-6">
               <PatentBadge className="bg-white/50 backdrop-blur-sm" />
             </div>
           </div>
 
           {/* Animation container */}
-          <div className="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center shrink-0">
+          <div className="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center shrink-0 mt-32 md:mt-100">
             {/* Scattered documents */}
             {documentItems.map((item, index) => (
               <div
