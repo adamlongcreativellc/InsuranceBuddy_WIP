@@ -40,7 +40,7 @@ export default function ValueProps() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {/* Left Column - First card */}
           <div className="h-full">
-            <div className="glass p-8 h-full rounded-2xl hover:border-primary-200 transition-all duration-300 flex flex-col items-center text-center group">
+            <div className="glass p-8 h-full rounded-2xl hover:border-primary-200 hover:bg-gradient-to-br hover:from-white hover:to-primary-50 transition-all duration-300 flex flex-col items-center text-center group">
               <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 {valueProps[0].icon}
               </div>
@@ -74,7 +74,7 @@ export default function ValueProps() {
 
           {/* Right Column - Second card */}
           <div className="h-full">
-            <div className="glass p-8 h-full rounded-2xl hover:border-secondary-200 transition-all duration-300 flex flex-col items-center text-center group">
+            <div className="glass p-8 h-full rounded-2xl hover:border-secondary-200 hover:bg-gradient-to-br hover:from-white hover:to-secondary-50 transition-all duration-300 flex flex-col items-center text-center group">
               <div className="w-16 h-16 bg-secondary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 {valueProps[1].icon}
               </div>

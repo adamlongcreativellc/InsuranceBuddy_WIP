@@ -51,7 +51,7 @@ export default function LifeProgressionStory() {
     <section
       ref={containerRef}
       id="life-progression"
-      className="py-20 md:py-32 bg-slate-50 relative overflow-hidden"
+      className="py-20 md:py-20 bg-slate-50 relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -84,15 +84,15 @@ export default function LifeProgressionStory() {
                   <div
                     key={milestone.age}
                     className={`relative pl-12 transition-all duration-700 ease-out ${index <= visibleIndex
-                        ? "opacity-100 translate-x-0"
-                        : "opacity-30 -translate-x-4"
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-30 -translate-x-4"
                       }`}
                   >
                     {/* Timeline dot */}
                     <div
                       className={`absolute left-0 top-2 w-6 h-6 rounded-full border-4 border-white transition-all duration-500 ${index <= visibleIndex
-                          ? "bg-primary-600 scale-125 shadow-[0_0_0_4px_rgba(37,99,235,0.2)]"
-                          : "bg-slate-300 scale-100"
+                        ? "bg-primary-600 scale-125 shadow-[0_0_0_4px_rgba(37,99,235,0.2)]"
+                        : "bg-slate-300 scale-100"
                         }`}
                     />
 

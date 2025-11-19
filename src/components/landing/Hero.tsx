@@ -24,7 +24,7 @@ export default function Hero() {
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-slate-900">
               Do You Know What <br />
               You&apos;re{" "}
-              <span className="relative inline-block">
+              <span className="relative inline-block text-primary-600">
                 Really
                 <svg
                   className="absolute left-0 right-0 -bottom-2 w-full h-4 text-primary-500"
@@ -41,12 +41,34 @@ export default function Hero() {
                   />
                 </svg>
               </span>{" "}
-              Spending <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-500">
+                $pending
+              </span> <br />
               on Insurance?
             </h1>
 
             <div className="flex justify-center lg:justify-start">
               <PatentBadge />
+            </div>
+
+            {/* Mobile-only Buddy Mascot (Above the fold) */}
+            <div className="lg:hidden relative w-48 h-48 mx-auto -my-4 animate-float-slow z-10">
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary-200 to-secondary-200 rounded-full blur-2xl opacity-40 animate-pulse-glow" />
+              <div className="relative w-full h-full flex items-center justify-center">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-[110%] max-w-none drop-shadow-xl"
+                  style={{ background: 'transparent' }}
+                >
+                  <source
+                    src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1/buddyanimate_rokrov.webm"
+                    type='video/webm; codecs="vp8, vorbis"'
+                  />
+                </video>
+              </div>
             </div>
 
             <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-medium">
@@ -93,9 +115,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Video/Visual Content */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+          {/* Video/Visual Content (Desktop Only) */}
+          <div className="hidden lg:block lg:col-span-5 relative">
+            <div className="relative w-full aspect-square max-w-[500px] mx-auto animate-float-slow">
               {/* Decorative blob behind video */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-200 to-secondary-200 rounded-full blur-3xl opacity-30 animate-pulse-glow" />
 
@@ -105,7 +127,7 @@ export default function Hero() {
                   muted
                   loop
                   playsInline
-                  className="w-[120%] max-w-none drop-shadow-2xl"
+                  className="w-[110%] lg:w-[120%] max-w-none drop-shadow-2xl"
                   style={{ background: 'transparent' }}
                 >
                   <source

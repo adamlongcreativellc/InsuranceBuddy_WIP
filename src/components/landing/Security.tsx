@@ -31,7 +31,7 @@ const securityFeatures = [
 
 export default function Security() {
   return (
-    <section id="security" className="py-20 md:py-32 bg-white">
+    <section id="security" className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-16">
           <div className="text-center max-w-3xl mx-auto flex flex-col gap-6">
@@ -48,7 +48,7 @@ export default function Security() {
             {securityFeatures.map((feature, index) => (
               <div
                 key={index}
-                className="group p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary-200 hover:shadow-xl hover:bg-white transition-all duration-300"
+                className="group p-8 rounded-2xl bg-white border border-slate-100 hover:border-primary-200 hover:shadow-xl hover:bg-gradient-to-br hover:from-white hover:to-primary-50 transition-all duration-300"
               >
                 <div className="flex flex-col items-center text-center gap-6">
                   <div className="w-16 h-16 rounded-2xl bg-primary-100 text-primary-600 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary-600 group-hover:text-white transition-all duration-300">

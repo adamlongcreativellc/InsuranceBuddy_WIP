@@ -34,10 +34,15 @@
 @layer utilities {
   .glass {
     @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-lg;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
   }
-  
+
   .glass-card {
     @apply bg-white/80 backdrop-blur-xl border border-white/50 shadow-xl rounded-2xl;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    box-shadow:
+      0 4px 24px -1px rgba(0, 0, 0, 0.05),
+      0 0 0 1px rgba(255, 255, 255, 0.5) inset;
   }
 
   .glass-dark {
@@ -47,7 +52,7 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-500;
   }
-  
+
   .text-gradient-accent {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-500 to-orange-500;
   }
@@ -55,18 +60,51 @@
 
 /* Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 15px rgba(37, 99, 235, 0.2); }
-  50% { box-shadow: 0 0 25px rgba(37, 99, 235, 0.5); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.5);
+  }
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
 }
 
 .animate-float {
@@ -81,12 +119,21 @@
   animation: pulse-glow 3s infinite;
 }
 
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
 /* Base Styles */
 body {
   @apply bg-surface-50 text-slate-900 antialiased;
   font-feature-settings: "cv11", "ss01";
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-heading font-bold tracking-tight;
 }

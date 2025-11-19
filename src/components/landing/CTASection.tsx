@@ -40,7 +40,7 @@ export default function CTASection({ variant = "default" }: CTASectionProps) {
 
   return (
     <>
-      <section className="py-20 md:py-32 bg-slate-50">
+      <section className="py-20 md:py-32 bg-gradient-to-b from-slate-50 to-primary-50/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col gap-8 items-center">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">

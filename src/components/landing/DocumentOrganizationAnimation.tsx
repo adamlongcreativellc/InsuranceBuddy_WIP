@@ -67,9 +67,9 @@ export default function DocumentOrganizationAnimation() {
       ScrollTrigger.create({
         trigger: containerRef.current,
         pin: pinRef.current,
-        start: "top top", // Start pinning when section reaches top of viewport
-        end: "+=2500", // Extended scroll distance for longer, more visible animation
-        scrub: 1, // Smooth easing (1 second of smoothing)
+        start: "top top",
+        end: "+=1200", // Further reduced to make it snappier
+        scrub: 1,
         onUpdate: (self) => {
           setScrollProgress(self.progress);
         },
@@ -81,7 +81,6 @@ export default function DocumentOrganizationAnimation() {
 
   // Calculate Buddy's position based on scroll progress
   const getBuddyPosition = () => {
-    // Buddy stays centered and stationary
     return { x: 0, y: 0, scale: 1 };
   };
 
@@ -89,18 +88,18 @@ export default function DocumentOrganizationAnimation() {
 
   // Calculate position for each document based on scroll progress
   const getDocumentStyle = (item: typeof documentItems[0]) => {
-    // Progress from scattered (0) to centered (1)
     const progress = scrollProgress;
 
     // Interpolate position from start to center (0, 0)
     const currentX = item.startX * (1 - progress);
     const currentY = item.startY * (1 - progress);
 
-    // Scale down as they converge - ending smaller so they go "behind" the logo
-    const scale = 1 - progress * 0.8; // Scale from 1 to 0.2
+    // Scale down as they converge
+    const scale = 1 - progress * 0.8;
 
     // Fade in faster - reaches full opacity at 0.4 progress, then fades out
-    const opacity = progress < 0.4 ? progress * 2.5 : progress < 0.7 ? 1 : (1 - progress) * 3;
+    // Chaos text fades out around 0.4-0.5, so we match that
+    const opacity = progress < 0.3 ? progress * 3.3 : progress < 0.4 ? 1 : Math.max(0, 1 - (progress - 0.4) * 5);
 
     return {
       transform: `translate(${currentX}px, ${currentY}px) scale(${scale})`,
@@ -112,151 +111,151 @@ export default function DocumentOrganizationAnimation() {
   return (
     <section
       ref={containerRef}
-      className="min-h-[130vh] relative py-20 -mt-12 md:-mt-16 bg-transparent overflow-hidden"
+      className="min-h-screen relative py-10 -mt-12 md:-mt-16 bg-transparent overflow-hidden"
     >
       <div
         ref={pinRef}
-        className="h-screen flex items-center justify-center"
+        className="h-[70vh] flex flex-col items-center justify-center relative"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="flex flex-col items-center text-center gap-8">
-            {/* Header text */}
-            <div className="absolute top-16 md:top-20 left-0 right-0 z-20 px-4">
-              <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm">
-                Your Insurance Plans Are All Over
-              </h2>
-              <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-4 font-medium">
-                File drawers, glove boxes, phones, computers, email—total chaos.
-              </p>
-              <div className="flex justify-center mt-2">
-                <PatentBadge className="bg-white/50 backdrop-blur-sm" />
-              </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 w-full flex flex-col items-center">
+
+          {/* Header text */}
+          <div className="absolute top-16 md:top-20 left-0 right-0 z-20 px-4 text-center">
+            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 drop-shadow-sm">
+              Do you know where all your <br></br> insurance docs are?
+            </h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-4 font-medium">
+              File drawers, glove boxes, phones, computers, email—total chaos.
+            </p>
+            <div className="flex justify-center mt-2">
+              <PatentBadge className="bg-white/50 backdrop-blur-sm" />
             </div>
+          </div>
 
-            {/* Animation container */}
-            <div className="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center">
-              {/* Scattered documents */}
-              {documentItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="absolute text-5xl md:text-6xl will-change-transform pointer-events-none select-none"
-                  style={getDocumentStyle(item)}
-                  role="img"
-                  aria-label={item.label}
-                >
-                  {item.emoji}
-                </div>
-              ))}
-
-              {/* Chaos messaging - floating questions */}
+          {/* Animation container */}
+          <div className="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center shrink-0">
+            {/* Scattered documents */}
+            {documentItems.map((item, index) => (
               <div
-                className={`absolute top-[15%] md:top-[20%] left-[5%] md:left-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.1 && scrollProgress < 0.35 ? "opacity-100" : "opacity-0"
-                  }`}
+                key={index}
+                className="absolute text-5xl md:text-6xl will-change-transform pointer-events-none select-none"
+                style={getDocumentStyle(item)}
+                role="img"
+                aria-label={item.label}
               >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Where did I put that policy?&rdquo;
-                </div>
+                {item.emoji}
               </div>
+            ))}
 
-              <div
-                className={`absolute top-[68%] md:top-[70%] right-[8%] md:right-[12%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.2 && scrollProgress < 0.45 ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Was it in the car?&rdquo;
-                </div>
-              </div>
-
-              <div
-                className={`absolute bottom-[18%] md:bottom-[20%] left-[8%] md:left-[15%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.15 && scrollProgress < 0.4 ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Maybe the desk?&rdquo;
-                </div>
-              </div>
-
-              {/* Additional chaos questions */}
-              <div
-                className={`absolute top-[10%] md:top-[15%] right-[5%] md:right-[12%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.05 && scrollProgress < 0.3 ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Did I scan that?&rdquo;
-                </div>
-              </div>
-
-              <div
-                className={`absolute top-[32%] md:top-[35%] left-[3%] md:left-[8%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.18 && scrollProgress < 0.42 ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Is it in my email?&rdquo;
-                </div>
-              </div>
-
-              <div
-                className={`absolute top-[50%] md:top-[52%] right-[5%] md:right-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.25 && scrollProgress < 0.48 ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Check the storage box?&rdquo;
-                </div>
-              </div>
-
-              <div
-                className={`absolute bottom-[8%] md:bottom-[10%] right-[25%] md:right-[30%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.12 && scrollProgress < 0.38 ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Which phone has it?&rdquo;
-                </div>
-              </div>
-
-              <div
-                className={`absolute top-[52%] md:top-[55%] left-[5%] md:left-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.22 && scrollProgress < 0.46 ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
-                  &ldquo;Filing cabinet or desk?&rdquo;
-                </div>
-              </div>
-
-              {/* Center logo - Buddy (now moves to fetch documents!) */}
-              <div
-                className="absolute z-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-primary-600 flex items-center justify-center overflow-hidden will-change-transform"
-                style={{
-                  boxShadow: `0 8px 32px rgba(37, 99, 235, ${0.3 + scrollProgress * 0.4})`,
-                  transform: `translate(${buddyPos.x}px, ${buddyPos.y}px) scale(${buddyPos.scale})`,
-                }}
-              >
-                <div className="relative w-[85%] h-[85%] drop-shadow-lg">
-                  <Image
-                    src="https://res.cloudinary.com/dzcrxivpm/image/upload/v1760720724/buddy_website_i9yk5a.webp"
-                    alt="InsuranceBuddy Mascot"
-                    fill
-                    style={{ objectFit: "contain" }}
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom text - positioned absolutely to avoid overlap */}
+            {/* Chaos messaging - floating questions */}
             <div
-              className={`absolute bottom-20 md:bottom-24 left-0 right-0 z-20 transition-opacity duration-200 ${scrollProgress > 0.6 ? "opacity-100" : "opacity-0"
+              className={`absolute top-[15%] md:top-[20%] left-[5%] md:left-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.1 && scrollProgress < 0.35 ? "opacity-100" : "opacity-0"
                 }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;How much is my renters insurance?&rdquo;
+              </div>
+            </div>
+
+            <div
+              className={`absolute top-[68%] md:top-[70%] right-[8%] md:right-[12%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.2 && scrollProgress < 0.45 ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;What are we paying for car insurance?&rdquo;
+              </div>
+            </div>
+
+            <div
+              className={`absolute bottom-[18%] md:bottom-[20%] left-[8%] md:left-[15%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.15 && scrollProgress < 0.4 ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;Maybe the desk?&rdquo;
+              </div>
+            </div>
+
+            {/* Additional chaos questions */}
+            <div
+              className={`absolute top-[10%] md:top-[15%] right-[5%] md:right-[12%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.05 && scrollProgress < 0.3 ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;What do we pay for life insurance?&rdquo;
+              </div>
+            </div>
+
+            <div
+              className={`absolute top-[32%] md:top-[35%] left-[3%] md:left-[8%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.18 && scrollProgress < 0.42 ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;Is it in my email?&rdquo;
+              </div>
+            </div>
+
+            <div
+              className={`absolute top-[50%] md:top-[52%] right-[5%] md:right-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.25 && scrollProgress < 0.48 ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;Check the storage box?&rdquo;
+              </div>
+            </div>
+
+            <div
+              className={`absolute bottom-[8%] md:bottom-[10%] right-[25%] md:right-[30%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.12 && scrollProgress < 0.38 ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;Which phone has it?&rdquo;
+              </div>
+            </div>
+
+            <div
+              className={`absolute top-[52%] md:top-[55%] left-[5%] md:left-[10%] transition-opacity duration-300 pointer-events-none ${scrollProgress > 0.22 && scrollProgress < 0.46 ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="glass-card px-6 py-3 text-rose-500 font-medium italic text-lg shadow-lg">
+                &ldquo;Filing cabinet or desk?&rdquo;
+              </div>
+            </div>
+
+            {/* Center logo - Buddy */}
+            <div
+              className="absolute z-10 w-40 h-40 md:w-56 md:h-56 rounded-full bg-primary-600 flex items-center justify-center overflow-hidden will-change-transform animate-breathe"
               style={{
-                opacity: scrollProgress > 0.6 ? Math.min(1, (scrollProgress - 0.6) * 2.5) : 0,
+                boxShadow: `0 8px 32px rgba(37, 99, 235, ${0.3 + scrollProgress * 0.4})`,
+                transform: `translate(${buddyPos.x}px, ${buddyPos.y}px) scale(${buddyPos.scale})`,
               }}
             >
-              <h3 className="text-3xl md:text-4xl font-bold text-primary-600 mb-3 drop-shadow-sm">
-                ✨ All Sorted in One Place
-              </h3>
-              <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
-                Buddy brings it all together—safe, sorted, and always there for you.
-              </p>
+              <div className="relative w-[85%] h-[85%] drop-shadow-lg">
+                <Image
+                  src="https://res.cloudinary.com/dzcrxivpm/image/upload/v1760720724/buddy_website_i9yk5a.webp"
+                  alt="InsuranceBuddy Mascot"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
             </div>
+          </div>
+
+          {/* Bottom text - Relative positioning to be closer to Buddy */}
+          <div
+            className={`relative -mt-24 md:-mt-32 z-20 text-center transition-opacity duration-300 ${scrollProgress > 0.45 ? "opacity-100" : "opacity-0"
+              }`}
+            style={{
+              // Fade in earlier (starting at 0.45)
+              opacity: scrollProgress > 0.45 ? Math.min(1, (scrollProgress - 0.45) * 4) : 0,
+            }}
+          >
+            <h3 className="text-3xl md:text-4xl font-bold text-primary-600 mb-3 drop-shadow-sm">
+              ✨ All Sorted in One Place
+            </h3>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
+              Buddy brings it all together—safe, sorted, and always there for you.
+            </p>
           </div>
         </div>
       </div>

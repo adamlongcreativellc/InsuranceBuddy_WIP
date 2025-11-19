@@ -34,7 +34,7 @@ export default function BetaInvite() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="glass-card p-8 md:p-12 text-center border-none bg-white/10 backdrop-blur-md shadow-2xl">
+        <div className="p-8 md:p-12 text-center rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md shadow-2xl">
           <div className="flex flex-col gap-8 items-center">
             <div className="flex flex-col gap-4">
               <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
