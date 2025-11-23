@@ -148,7 +148,7 @@ export default function DocumentOrganizationAnimation() {
           </div>
 
           {/* Animation container */}
-          <div className="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center shrink-0 mt-32 md:mt-100">
+          <div className="relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center shrink-0 mt-32 md:mt-[25rem]">
             {/* Scattered documents */}
             {documentItems.map((item, index) => (
               <div

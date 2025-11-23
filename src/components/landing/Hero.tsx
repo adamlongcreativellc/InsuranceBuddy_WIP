@@ -3,14 +3,12 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import EarlyAccessDialog from "./EarlyAccessDialog";
-import PatentBadge from "./PatentBadge";
-import { handleSmoothScroll } from "@/utils/smoothScroll";
 
 export default function Hero() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <section className="relative pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden">
+    <section className="relative pt-32 pb-32 md:pt-40 md:pb-48 lg:pb-60 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary-100/50 rounded-full blur-3xl opacity-60 animate-float-slow" />
@@ -18,10 +16,10 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-25 items-center">
           {/* Text Content */}
-          <div className="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-slate-900">
+          <div className="lg:col-span-6 flex flex-col gap-6 text-center lg:text-left">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem] 2xl:text-6xl font-bold leading-[1.1] tracking-tight text-slate-900">
               Do You Know What <br />
               You&apos;re{" "}
               <span className="relative inline-block text-primary-600">
@@ -47,12 +45,8 @@ export default function Hero() {
               on Insurance?
             </h1>
 
-            <div className="flex justify-center lg:justify-start">
-              <PatentBadge />
-            </div>
-
-            {/* Mobile-only Buddy Mascot (Above the fold) */}
-            <div className="lg:hidden relative w-48 h-48 mx-auto -my-4 animate-float-slow z-10">
+            {/* Mobile-only Buddy Mascot (Above the fold) - HIDDEN */}
+            {/* <div className="lg:hidden relative w-48 h-48 mx-auto -my-4 animate-float-slow z-10">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-200 to-secondary-200 rounded-full blur-2xl opacity-40 animate-pulse-glow" />
               <div className="relative w-full h-full flex items-center justify-center">
                 <video
@@ -64,14 +58,18 @@ export default function Hero() {
                   style={{ background: 'transparent' }}
                 >
                   <source
-                    src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1/buddyanimate_rokrov.webm"
-                    type='video/webm; codecs="vp8, vorbis"'
+                    src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1760106640/buddyanimate_rokrov.webm"
+                    type="video/webm"
+                  />
+                  <source
+                    src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1760106640/buddyanimate_rokrov.mp4"
+                    type="video/mp4"
                   />
                 </video>
               </div>
-            </div>
+            </div> */}
 
-            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-medium">
+            <p className="text-base sm:text-lg lg:text-lg xl:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-medium">
               InsuranceBuddy™ is your faithful companion that finally reveals how much you&apos;re really spending on insurance and organizes all your scattered policies into one secure place.
             </p>
 
@@ -88,55 +86,52 @@ export default function Hero() {
                   100% Free • No Credit Card
                 </span>
               </div>
-
-              <button
-                onClick={(e) => handleSmoothScroll(e, "#how-it-works")}
-                className="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-lg font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                See How It Works
-              </button>
-            </div>
-
-            {/* Social Proof / Beta Users */}
-            <div className="flex items-center justify-center lg:justify-start gap-3 mt-4">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500"
-                  >
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm font-medium text-slate-600">
-                Join our beta community
-              </p>
             </div>
           </div>
 
           {/* Video/Visual Content (Desktop Only) */}
-          <div className="hidden lg:block lg:col-span-5 relative">
-            <div className="relative w-full aspect-square max-w-[500px] mx-auto animate-float-slow">
-              {/* Decorative blob behind video */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary-200 to-secondary-200 rounded-full blur-3xl opacity-30 animate-pulse-glow" />
-
-              <div className="relative z-10 w-full h-full flex items-center justify-center">
+          <div className="hidden lg:block lg:col-span-6 relative">
+            <div className="relative w-full max-w-[240px] lg:max-w-[250px] xl:max-w-[275px] 2xl:max-w-[320px] ml-0 lg:-ml-8 xl:-ml-4 2xl:ml-0 aspect-[9/19] mx-auto">
+              {/* Phone Mockup */}
+              <div className="relative z-20 rounded-[2.5rem] border-8 border-slate-900 overflow-hidden shadow-2xl bg-slate-900 w-auto h-auto aspect-[9/19] animate-float-slow">
                 <video
                   autoPlay
                   muted
                   loop
                   playsInline
-                  className="w-[110%] lg:w-[120%] max-w-none drop-shadow-2xl"
-                  style={{ background: 'transparent' }}
+                  className="w-auto h-auto object-cover"
                 >
-                  <source
-                    src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1/buddyanimate_rokrov.webm"
-                    type='video/webm; codecs="vp8, vorbis"'
-                  />
+                  <source src="/images/app-recording.mp4" type="video/mp4" />
                 </video>
               </div>
+
+              {/* Decorative elements behind phone */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 bg-gradient-to-b from-primary-200/30 to-secondary-200/30 blur-3xl rounded-full transform scale-150" />
             </div>
+          </div>
+
+          {/* Buddy Peeking from Browser Edge */}
+          <div className="hidden lg:block absolute top-1/2 -right-25 transform -translate-y-1/3 translate-x-[35%] w-[clamp(320px,_25vw,_650px)] h-auto z-30 -rotate-0 overflow-visible">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-auto object-contain"
+              style={{ background: "transparent" }}
+            >
+              <source
+                src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1760106640/buddyanimate_rokrov.webm"
+                type="video/webm"
+              />
+              <source
+                src="https://res.cloudinary.com/dzcrxivpm/video/upload/v1760106640/buddyanimate_rokrov.mp4"
+                type="video/mp4"
+              />
+            </video>
+
+            {/* Ground shadow under buddy's feet */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-8 bg-slate-900/20 rounded-full blur-xl -z-10" />
           </div>
         </div>
       </div>

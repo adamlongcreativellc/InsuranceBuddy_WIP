@@ -1,7 +1,13 @@
 "use client";
 
-import { TrendingUp, FolderOpen, ShieldCheck, ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TrendingUp, FolderOpen, ArrowRight } from "lucide-react";
 import PatentBadge from "./PatentBadge";
+
+// Register GSAP plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const valueProps = [
   {
@@ -19,17 +25,55 @@ const valueProps = [
 ];
 
 export default function ValueProps() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [animatedNumber, setAnimatedNumber] = useState(0);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Timeline for coordinated animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",      // Start when top of element is 80% down viewport
+          end: "top 30%",        // End when top is 30% down viewport
+          scrub: 1,              // Smooth scrubbing with 1 second lag
+          toggleActions: "play reverse play reverse"
+        }
+      });
+
+      // Fade in and slide up
+      tl.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+      );
+
+      // Animate number
+      tl.to(
+        { value: 0 },
+        {
+          value: 18,
+          duration: 1,
+          ease: "power2.out",
+          onUpdate: function() {
+            setAnimatedNumber(Math.round(this.targets()[0].value));
+          }
+        },
+        "<" // Start at same time as fade
+      );
+    });
+
+    return () => ctx.revert(); // Cleanup
+  }, []);
+
   return (
-    <section id="features" className="py-12 md:py-24 relative overflow-hidden">
+    <section id="features" className="py-12 md:py-5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 18% Income Stat Callout */}
         <div className="max-w-3xl mx-auto mb-16 text-center">
-          <div className="glass-card p-8 md:p-12 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-secondary-500" />
-            <div className="absolute -right-20 -top-20 w-64 h-64 bg-primary-100/50 rounded-full blur-3xl group-hover:bg-primary-200/50 transition-colors duration-500" />
-
+          <div ref={containerRef} className="p-8 md:p-6 relative overflow-hidden">
             <h3 className="text-5xl md:text-7xl font-bold text-primary-600 mb-4 tracking-tight">
-              18% of Income
+              {animatedNumber}% of Your Annual Income
             </h3>
             <p className="text-xl md:text-2xl text-slate-600 font-medium">
               is normal insurance spending for most households
@@ -37,7 +81,7 @@ export default function ValueProps() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Left Column - First card */}
           <div className="h-full">
             <div className="glass p-8 h-full rounded-2xl hover:border-primary-200 hover:bg-gradient-to-br hover:from-white hover:to-primary-50 transition-all duration-300 flex flex-col items-center text-center group">
@@ -50,25 +94,6 @@ export default function ValueProps() {
               <p className="text-lg text-slate-600 leading-relaxed">
                 {valueProps[0].description}
               </p>
-            </div>
-          </div>
-
-          {/* Center Column - Phone Video */}
-          <div className="relative">
-            <div className="sticky top-24">
-              <div className="relative rounded-[2.5rem] border-8 border-slate-900 overflow-hidden shadow-2xl bg-slate-900 aspect-[9/19] max-w-[320px] mx-auto">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/images/app-recording.mp4" type="video/mp4" />
-                </video>
-              </div>
-              {/* Decorative elements behind phone */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 bg-gradient-to-b from-primary-200/30 to-secondary-200/30 blur-3xl rounded-full transform scale-150" />
             </div>
           </div>
 
