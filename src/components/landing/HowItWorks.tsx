@@ -30,7 +30,7 @@ const steps = [
     icon: Search,
     title: "See Your Real Spend",
     description:
-      "Track what you really pay and see where your cash goes. Most folks are shocked by how much they spend.",
+      "Track what you really pay and see where your cash goes. Most people are shocked by how much they spend.",
     screenshot: "/images/app-screenshot-policy-search.png",
   },
 ];

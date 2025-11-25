@@ -119,7 +119,7 @@ export default function InsuranceTypes() {
             You Have More Policies Than You Think
           </h2>
           <p className="text-xl text-slate-600 font-medium mb-4">
-            Most folks forget about plans they&apos;ve picked up over the years.
+            Most people forget about plans they&apos;ve picked up over the years.
             <br className="hidden md:block" /> How many do you have?
           </p>
           <div className="flex justify-center">

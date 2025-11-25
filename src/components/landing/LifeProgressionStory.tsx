@@ -64,10 +64,10 @@ export default function LifeProgressionStory() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-              Real Folks, Real Shocks
+              Real people, Real Shocks
             </h2>
             <p className="text-xl text-slate-600 font-medium">
-              Watch how life adds up. Most folks have no idea how much they really spend.
+              Watch how life adds up. Most people have no idea how much they really spend.
             </p>
           </div>
 
@@ -150,7 +150,7 @@ export default function LifeProgressionStory() {
                 {visibleIndex === lifeMilestones.length - 1 && (
                   <div className="mt-8 pt-8 border-t border-slate-100 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <p className="text-lg text-rose-500 font-bold mb-2">
-                      Most folks guess: $10,000
+                      Most people guess: $10,000
                     </p>
                     <p className="text-2xl text-slate-700">
                       Real cost? <strong className="text-slate-900">${currentMilestone.spending.toLocaleString()}/year</strong>

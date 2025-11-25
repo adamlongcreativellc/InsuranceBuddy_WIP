@@ -19,7 +19,7 @@ export default function Hero() {
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-25 items-center">
           {/* Text Content */}
           <div className="lg:col-span-6 flex flex-col gap-6 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem] 2xl:text-6xl font-bold leading-[1.1] tracking-tight text-slate-900">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-[3rem] xl:text-[3.25rem] 2xl:text-[3.5rem] font-bold leading-[1.15] tracking-tight text-slate-900">
               Do You Know What <br />
               You&apos;re{" "}
               <span className="relative inline-block text-primary-600">
@@ -41,7 +41,8 @@ export default function Hero() {
               </span>{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-500">
                 $pending
-              </span> <br />
+              </span>{" "}
+              <br />
               on Insurance?
             </h1>
 
@@ -93,7 +94,7 @@ export default function Hero() {
           <div className="hidden lg:block lg:col-span-6 relative">
             <div className="relative w-full max-w-[240px] lg:max-w-[250px] xl:max-w-[275px] 2xl:max-w-[320px] ml-0 lg:-ml-8 xl:-ml-4 2xl:ml-0 aspect-[9/19] mx-auto">
               {/* Phone Mockup */}
-              <div className="relative z-20 rounded-[2.5rem] border-8 border-slate-900 overflow-hidden shadow-2xl bg-slate-900 w-auto h-auto aspect-[9/19] animate-float-slow">
+              <div className="relative z-20 rounded-[2.5rem] border-8 border-slate-900 overflow-hidden shadow-2xl bg-slate-900 w-auto h-auto aspect-[9/19]">
                 <video
                   autoPlay
                   muted
@@ -111,7 +112,7 @@ export default function Hero() {
           </div>
 
           {/* Buddy Peeking from Browser Edge */}
-          <div className="hidden lg:block absolute top-1/2 -right-25 transform -translate-y-1/3 translate-x-[35%] w-[clamp(320px,_25vw,_650px)] h-auto z-30 -rotate-0 overflow-visible">
+          <div className="hidden lg:block absolute top-1/2 -right-16 xl:-right-12 2xl:-right-8 transform -translate-y-1/3 translate-x-[20%] xl:translate-x-[15%] 2xl:translate-x-[10%] w-[clamp(280px,_22vw,_550px)] h-auto z-30 -rotate-0 overflow-visible">
             <video
               autoPlay
               muted

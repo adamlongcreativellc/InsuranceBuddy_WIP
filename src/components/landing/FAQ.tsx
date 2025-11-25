@@ -12,7 +12,7 @@ const faqs = [
   {
     question: "How does Buddy help me track my spend?",
     answer:
-      "Buddy reads all your insurance papers and adds up what you really spend each year. Many folks are shocked to learn they spend way more than they thought – just like Stephen, who thought he spent $12,000 but really spent $35,000!",
+      "Buddy reads all your insurance papers and adds up what you really spend each year. Many people are shocked to learn they spend way more than they thought – just like Stephen, who thought he spent $12,000 but really spent $35,000!",
   },
   {
     question: "Which plan types work?",

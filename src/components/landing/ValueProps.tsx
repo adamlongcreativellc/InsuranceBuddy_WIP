@@ -14,7 +14,7 @@ const valueProps = [
     icon: <TrendingUp className="w-8 h-8 text-primary-600" />,
     title: "Track Your Real Spend",
     description:
-      "Most folks guess too low—by thousands. See what you really spend.",
+      "Most people guess too low—by thousands. See what you really spend.",
   },
   {
     icon: <FolderOpen className="w-8 h-8 text-secondary-500" />,
