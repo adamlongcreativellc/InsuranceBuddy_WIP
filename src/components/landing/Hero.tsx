@@ -8,7 +8,7 @@ export default function Hero() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <section className="relative pt-32 pb-32 md:pt-40 md:pb-48 lg:pb-60 overflow-hidden">
+    <section className="relative pt-32 pb-32 md:pt-40 md:pb-40 lg:pb-60 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary-100/50 rounded-full blur-3xl opacity-60 animate-float-slow" />

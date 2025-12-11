@@ -72,8 +72,8 @@ export default function DocumentOrganizationAnimation() {
   // Generate random styles once on mount (client-side only)
   useEffect(() => {
     const styles = insuranceTypes.map(() => ({
-      widthVariation: 290 + Math.random() * 60,
-      mdWidthVariation: 370 + Math.random() * 60,
+      widthVariation: 160 + Math.random() * 30,
+      mdWidthVariation: 200 + Math.random() * 40,
       brightness: 0.92 + Math.random() * 0.16,
       contrast: 0.95 + Math.random() * 0.1,
       shadowX1: Math.random() * 4 - 2,
@@ -108,14 +108,14 @@ export default function DocumentOrganizationAnimation() {
         // More randomization for tattered paper effect
         const randomRotation = (Math.random() - 0.5) * 70; // Increased from 25 to 70
         const randomX = (Math.random() - 0.5) * 500; // Spread out more horizontally (±250px)
-        const randomY = (Math.random() - 0.5) * 240; // Increased for more Y-axis spacing (±120px)
+        const randomY = (Math.random() - 0.5) * 160; // Increased for more Y-axis spacing (±80px)
         const randomSkew = (Math.random() - 0.5) * 6; // Add skew for crumpled effect
 
         tl.fromTo(
           card,
           {
             y: "110vh",
-            x: (Math.random() - 0.5) * 300, // Increased from 150 to 300
+            x: (Math.random() - 0.5) * 500, // Increased for wider spread
             rotation: (Math.random() - 0.5) * 120, // Increased from 60 to 120
             opacity: 0,
             scale: 0.7 + Math.random() * 0.2, // Vary initial scale
@@ -161,19 +161,19 @@ export default function DocumentOrganizationAnimation() {
 
   return (
     <section ref={containerRef} className="relative min-h-screen bg-slate-50 pb-40 md:pb-56 lg:pb-64">
-      <div ref={pinRef} className="h-screen flex flex-col items-center justify-center overflow-hidden pt-20 md:pt-24">
+      <div ref={pinRef} className="h-screen flex flex-col items-center justify-start overflow-hidden pt-24 md:pt-32">
         {/* Combined Header Section */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 mb-8 md:mb-12">
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 tracking-tight mb-6 leading-tight">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 mb-12 md:mb-16">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-6 leading-tight">
             You Have More Policies Than You Think—And You Probably Don&apos;t Know Where They Are
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
             Most people forget about plans they&apos;ve picked up over the years, scattered across file drawers, glove boxes, phones, computers, and email. How many do you have?
           </p>
         </div>
 
         {/* Stacking Cards Container */}
-        <div className="relative w-full max-w-md h-[300px] md:h-[400px] flex items-center justify-center perspective-[1000px]">
+        <div className="relative w-full max-w-md h-[200px] md:h-[280px] lg:h-[320px] flex items-center justify-center perspective-[1000px]">
           {insuranceTypes.map((type, index) => {
             const style = cardStyles[index];
             return (
@@ -229,12 +229,12 @@ export default function DocumentOrganizationAnimation() {
         {/* Final Reveal Text */}
         <div
           ref={finalTextRef}
-          className="relative z-20 mt-20 md:mt-32 bg-white/80 backdrop-blur-md border border-primary-100 p-6 md:p-8 rounded-3xl shadow-2xl max-w-2xl mx-4 text-center transform"
+          className="relative z-20 mt-8 md:mt-10 lg:mt-12 bg-white/80 backdrop-blur-md border border-primary-100 py-8 px-6 md:py-10 md:px-8 rounded-3xl shadow-2xl max-w-2xl mx-4 text-center transform"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-primary-600 mb-2">
+          <h3 className="text-xl md:text-2xl font-bold text-primary-600 mb-2">
             ✨ All Sorted in One Place
           </h3>
-          <p className="text-slate-600 font-medium">
+          <p className="text-sm md:text-base text-slate-600 font-medium">
             Buddy brings it all together—safe, sorted, and always there for you.
           </p>
         </div>
