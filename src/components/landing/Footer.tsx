@@ -19,7 +19,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="py-12 border-t border-slate-200 bg-gradient-to-b from-white to-slate-50">
+    <footer className="py-20 md:py-24 border-t border-slate-200 bg-gradient-to-b from-white to-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8">
           {/* Top section with logo */}

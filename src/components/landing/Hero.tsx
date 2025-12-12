@@ -47,7 +47,8 @@ export default function Hero() {
             </h1>
 
             {/* Mobile-only Buddy Mascot (Above the fold) - HIDDEN */}
-            {/* <div className="lg:hidden relative w-48 h-48 mx-auto -my-4 animate-float-slow z-10">
+            {/* Mobile-only Buddy Mascot (Above the fold) */}
+            <div className="lg:hidden relative w-40 h-40 sm:w-48 sm:h-48 mx-auto -mt-2 mb-6 z-10">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-200 to-secondary-200 rounded-full blur-2xl opacity-40 animate-pulse-glow" />
               <div className="relative w-full h-full flex items-center justify-center">
                 <video
@@ -68,7 +69,7 @@ export default function Hero() {
                   />
                 </video>
               </div>
-            </div> */}
+            </div>
 
             <p className="text-base sm:text-lg lg:text-lg xl:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-medium">
               InsuranceBuddy™ is your faithful companion that finally reveals how much you&apos;re really spending on insurance and organizes all your scattered policies into one secure place.

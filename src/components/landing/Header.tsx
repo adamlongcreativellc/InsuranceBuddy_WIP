@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { handleSmoothScroll } from "@/utils/smoothScroll";
 import EarlyAccessDialog from "./EarlyAccessDialog";
@@ -18,6 +18,7 @@ const navItems = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,21 +33,33 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <>
       <header
         className={`
           fixed top-0 left-0 right-0 z-50 transition-all duration-300
-          ${scrolled
-            ? "bg-primary-600/95 backdrop-blur-md shadow-lg py-3"
-            : "bg-primary-600 py-4"
+          ${scrolled || mobileMenuOpen
+            ? "bg-primary-600/80 backdrop-blur-xl shadow-lg py-3 border-b border-white/10"
+            : "bg-primary-600 py-4 border-b border-transparent"
           }
         `}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link href="/" className="cursor-pointer">
+            <div className="flex items-center gap-4 relative z-50">
+              <Link href="/" className="cursor-pointer" onClick={() => setMobileMenuOpen(false)}>
                 <Image
                   src="/images/insurancebuddy-logo-white.svg"
                   alt="InsuranceBuddy™"
@@ -60,6 +73,7 @@ export default function Header() {
               </div>
             </div>
 
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
                 <a
@@ -73,24 +87,74 @@ export default function Header() {
               ))}
             </nav>
 
-            <button
-              onClick={() => setDialogOpen(true)}
-              className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-white text-primary-600 rounded-full text-sm font-bold shadow-md hover:shadow-lg hover:bg-slate-50 transition-all duration-300"
-            >
-              Get Early Access
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-4">
+              {/* Desktop CTA */}
+              <button
+                onClick={() => setDialogOpen(true)}
+                className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-white text-primary-600 rounded-full text-sm font-bold shadow-md hover:shadow-lg hover:bg-slate-50 transition-all duration-300"
+              >
+                Get Early Access
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
-            {/* Mobile menu button placeholder - can be expanded if needed */}
-            <button
-              onClick={() => setDialogOpen(true)}
-              className="md:hidden px-4 py-2 bg-white text-primary-600 rounded-full text-sm font-bold shadow-sm"
-            >
-              Join Beta
-            </button>
+              {/* Mobile CTA - Kept visible as requested */}
+              <button
+                onClick={() => setDialogOpen(true)}
+                className="md:hidden px-4 py-2 bg-white text-primary-600 rounded-full text-sm font-bold shadow-sm relative z-50"
+              >
+                Join Beta
+              </button>
+
+              {/* Mobile Menu Toggle */}
+              <button
+                className="md:hidden p-2 text-white relative z-50"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      </header>
+      </header >
+
+      {/* Mobile Menu Overlay */}
+      < div
+        className={`fixed inset-0 z-40 bg-primary-600 transform transition-transform duration-300 ease-in-out md:hidden ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`
+        }
+      >
+        <div className="flex flex-col items-center justify-center h-full space-y-8 p-8">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleSmoothScroll(e, item.href);
+              }}
+              className="text-white text-2xl font-bold hover:text-white/80 transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setDialogOpen(true);
+            }}
+            className="mt-8 flex items-center gap-2 px-8 py-4 bg-white text-primary-600 rounded-xl text-lg font-bold shadow-lg hover:bg-slate-50 transition-all"
+          >
+            Get Early Access
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div >
 
       <EarlyAccessDialog
         open={dialogOpen}

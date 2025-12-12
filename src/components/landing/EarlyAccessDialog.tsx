@@ -110,13 +110,13 @@ export default function EarlyAccessDialog({
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
       <div
-        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300"
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
       />
 
       <div
         className={`
-          relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]
+          relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-white/50 overflow-hidden flex flex-col max-h-[90vh]
           transform transition-all duration-300 ease-out
           ${open ? "scale-100 translate-y-0" : "scale-95 translate-y-4"}
         `}

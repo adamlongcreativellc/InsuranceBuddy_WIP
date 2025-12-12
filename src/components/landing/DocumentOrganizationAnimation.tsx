@@ -106,30 +106,35 @@ export default function DocumentOrganizationAnimation() {
         if (!card) return;
 
         // More randomization for tattered paper effect
-        const randomRotation = (Math.random() - 0.5) * 70; // Increased from 25 to 70
-        const randomX = (Math.random() - 0.5) * 500; // Spread out more horizontally (±250px)
-        const randomY = (Math.random() - 0.5) * 160; // Increased for more Y-axis spacing (±80px)
+        const randomRotation = (Math.random() - 0.5) * (isMobile ? 30 : 70); // Reduced rotation on mobile
+        // Drastically reduce spread on mobile to keep cards visible
+        // Reduced ranges by ~15% to match scale reduction
+        const xRange = isMobile ? 51 : 425;
+        const yRange = isMobile ? 60 : 120;
+
+        const randomX = (Math.random() - 0.5) * xRange;
+        const randomY = (Math.random() - 0.5) * yRange;
         const randomSkew = (Math.random() - 0.5) * 6; // Add skew for crumpled effect
 
         tl.fromTo(
           card,
           {
-            y: "110vh",
-            x: (Math.random() - 0.5) * 500, // Increased for wider spread
+            y: "60vh",
+            x: (Math.random() - 0.5) * (isMobile ? 100 : 500), // Adjusted for mobile to prevent overflow
             rotation: (Math.random() - 0.5) * 120, // Increased from 60 to 120
             opacity: 0,
-            scale: 0.7 + Math.random() * 0.2, // Vary initial scale
+            scale: (0.7 + Math.random() * 0.2) * 0.85, // Scaled down 15%
             skewX: (Math.random() - 0.5) * 15,
             skewY: (Math.random() - 0.5) * 15,
           },
           {
-            y: randomY,
+            y: randomY + 40, // Shifted down 40px to clear header
             x: randomX,
             rotation: randomRotation,
             skewX: randomSkew,
             skewY: randomSkew * 0.5,
             opacity: 1, // Solid paper - no transparency
-            scale: 0.95 + Math.random() * 0.1, // Slight scale variation
+            scale: (0.95 + Math.random() * 0.1) * 0.85, // Scaled down 15%
             duration: 1,
             ease: "power3.out",
           },
@@ -141,7 +146,7 @@ export default function DocumentOrganizationAnimation() {
       tl.fromTo(
         finalTextRef.current,
         {
-          y: 50,
+          y: 100,
           opacity: 0,
           scale: 0.9,
         },
@@ -160,10 +165,10 @@ export default function DocumentOrganizationAnimation() {
   }, [isMobile]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen bg-slate-50 pb-40 md:pb-56 lg:pb-64">
-      <div ref={pinRef} className="h-screen flex flex-col items-center justify-start overflow-hidden pt-24 md:pt-32">
+    <section ref={containerRef} className="relative z-20 min-h-screen bg-slate-50 pb-20 md:pb-32">
+      <div ref={pinRef} className="h-screen flex flex-col items-center justify-start overflow-visible pt-24 md:pt-32 pb-32">
         {/* Combined Header Section */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 mb-12 md:mb-16">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 mb-16 md:mb-24">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-6 leading-tight">
             You Have More Policies Than You Think—And You Probably Don&apos;t Know Where They Are
           </h2>
@@ -186,13 +191,13 @@ export default function DocumentOrganizationAnimation() {
                 style={
                   style
                     ? {
-                        zIndex: index + 1,
-                        width: `${isMobile ? style.widthVariation : style.mdWidthVariation}px`,
-                        filter: `drop-shadow(${style.shadowX1}px ${style.shadowY1}px ${style.shadowBlur1}px rgba(0,0,0,${style.shadowOpacity1})) drop-shadow(${style.shadowX2}px ${style.shadowY2}px ${style.shadowBlur2}px rgba(0,0,0,${style.shadowOpacity2})) brightness(${style.brightness}) contrast(${style.contrast})`,
-                      }
+                      zIndex: index + 1,
+                      width: `${isMobile ? style.widthVariation : style.mdWidthVariation}px`,
+                      filter: `drop-shadow(${style.shadowX1}px ${style.shadowY1}px ${style.shadowBlur1}px rgba(0,0,0,${style.shadowOpacity1})) drop-shadow(${style.shadowX2}px ${style.shadowY2}px ${style.shadowBlur2}px rgba(0,0,0,${style.shadowOpacity2})) brightness(${style.brightness}) contrast(${style.contrast})`,
+                    }
                     : {
-                        zIndex: index + 1,
-                      }
+                      zIndex: index + 1,
+                    }
                 }
               >
                 <div
@@ -229,7 +234,7 @@ export default function DocumentOrganizationAnimation() {
         {/* Final Reveal Text */}
         <div
           ref={finalTextRef}
-          className="relative z-20 mt-8 md:mt-10 lg:mt-12 bg-white/80 backdrop-blur-md border border-primary-100 py-8 px-6 md:py-10 md:px-8 rounded-3xl shadow-2xl max-w-2xl mx-4 text-center transform"
+          className="relative z-20 mt-32 md:mt-48 lg:mt-56 bg-white/80 backdrop-blur-md border border-primary-100 py-8 px-6 md:py-10 md:px-8 rounded-3xl shadow-2xl max-w-2xl mx-4 text-center transform"
         >
           <h3 className="text-xl md:text-2xl font-bold text-primary-600 mb-2">
             ✨ All Sorted in One Place
