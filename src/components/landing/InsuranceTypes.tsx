@@ -6,10 +6,7 @@ import PatentBadge from "./PatentBadge";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 const insuranceTypes = [
   { name: "Auto Insurance", color: "bg-blue-50", border: "border-blue-200" },
@@ -43,6 +40,7 @@ export default function InsuranceTypes() {
   }, []);
 
   useEffect(() => {
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -167,4 +165,3 @@ export default function InsuranceTypes() {
     </section>
   );
 }
-

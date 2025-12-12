@@ -40,6 +40,14 @@ export default function BetaInvite() {
               <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
                 Join the Beta
               </h2>
+              <div className="flex items-center justify-center gap-2 text-white/90">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full bg-primary-300 border-2 border-white/30" />
+                  <div className="w-8 h-8 rounded-full bg-secondary-400 border-2 border-white/30" />
+                  <div className="w-8 h-8 rounded-full bg-primary-400 border-2 border-white/30" />
+                </div>
+                <span className="text-sm font-semibold">2,800+ people on the waitlist</span>
+              </div>
               <p className="text-xl text-primary-100 font-medium max-w-2xl mx-auto">
                 {copyText}
               </p>

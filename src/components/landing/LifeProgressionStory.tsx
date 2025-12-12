@@ -6,10 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 // Life milestones with spending progression and associated images
 const lifeMilestones = [
@@ -45,8 +42,9 @@ export default function LifeProgressionStory() {
   const [visibleIndex, setVisibleIndex] = useState(0);
 
   useEffect(() => {
+
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+      gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           pin: pinRef.current,
@@ -66,14 +64,12 @@ export default function LifeProgressionStory() {
         },
       });
 
-      // We can add specific animations to the timeline if needed, 
+      // We can add specific animations to the timeline if needed,
       // but for now we drive state via onUpdate for React re-renders of the content
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
-
-  const currentMilestone = lifeMilestones[visibleIndex];
 
   return (
     <section ref={containerRef} className="relative bg-slate-50">

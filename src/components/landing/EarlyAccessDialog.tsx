@@ -115,6 +115,9 @@ export default function EarlyAccessDialog({
       />
 
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dialog-title"
         className={`
           relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-white/50 overflow-hidden flex flex-col max-h-[90vh]
           transform transition-all duration-300 ease-out
@@ -122,11 +125,12 @@ export default function EarlyAccessDialog({
         `}
       >
         <div className="flex items-center justify-between p-6 border-b border-slate-100">
-          <h2 className="text-2xl font-bold text-slate-900">
+          <h2 id="dialog-title" className="text-2xl font-bold text-slate-900">
             {submitted ? "Thank You" : "Join Early Access"}
           </h2>
           <button
             onClick={onClose}
+            aria-label="Close dialog"
             className="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors"
           >
             <X className="w-6 h-6" />

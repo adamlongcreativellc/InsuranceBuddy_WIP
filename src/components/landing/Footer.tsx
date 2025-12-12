@@ -53,7 +53,7 @@ export default function Footer() {
               <p className="text-sm text-slate-500">
                 © {currentYear} Digital Benefits Advisors LLC. Patent Pending.
               </p>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 InsuranceBuddy™ and Ask Buddy™ are trademarks of Digital
                 Benefits Advisors LLC.
               </p>

@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TrendingUp, FolderOpen, ArrowRight } from "lucide-react";
 import PatentBadge from "./PatentBadge";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const valueProps = [
@@ -29,6 +28,8 @@ export default function ValueProps() {
   const [animatedNumber, setAnimatedNumber] = useState(0);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const ctx = gsap.context(() => {
       // Timeline for coordinated animations
       const tl = gsap.timeline({
@@ -158,4 +159,3 @@ export default function ValueProps() {
     </section>
   );
 }
-

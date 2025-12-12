@@ -4,10 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 const insuranceTypes = [
   { name: "Auto Insurance", color: "bg-blue-50", border: "border-blue-200" },
@@ -90,6 +87,7 @@ export default function DocumentOrganizationAnimation() {
   }, []);
 
   useEffect(() => {
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {

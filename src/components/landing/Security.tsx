@@ -1,5 +1,3 @@
-"use client";
-
 import { Lock, ShieldCheck, Eye, Trash2 } from "lucide-react";
 
 const securityFeatures = [

@@ -56,6 +56,7 @@ export default function Hero() {
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   className="w-[110%] max-w-none drop-shadow-xl"
                   style={{ background: 'transparent' }}
                 >
@@ -84,9 +85,15 @@ export default function Hero() {
                   Get Early Access
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <span className="text-sm text-green-600 font-semibold mt-2">
-                  100% Free • No Credit Card
-                </span>
+                <div className="flex flex-col sm:flex-row items-center gap-2 mt-2">
+                  <span className="text-sm text-green-600 font-semibold">
+                    100% Free • No Credit Card
+                  </span>
+                  <span className="hidden sm:inline text-slate-300">•</span>
+                  <span className="text-sm text-slate-500 font-medium">
+                    2,800+ on waitlist
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -101,6 +108,7 @@ export default function Hero() {
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   className="w-auto h-auto object-cover"
                 >
                   <source src="/images/app-recording.mp4" type="video/mp4" />
@@ -119,6 +127,7 @@ export default function Hero() {
               muted
               loop
               playsInline
+              preload="metadata"
               className="w-full h-auto object-contain"
               style={{ background: "transparent" }}
             >

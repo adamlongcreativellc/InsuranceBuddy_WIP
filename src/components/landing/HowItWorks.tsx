@@ -66,13 +66,24 @@ export default function HowItWorks() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col gap-6">
+          <div role="tablist" aria-label="How it works steps" className="flex flex-col gap-6">
             {steps.map((step, index) => (
               <div
                 key={index}
+                id={`step-tab-${index}`}
+                role="tab"
+                tabIndex={activeTab === index ? 0 : -1}
+                aria-selected={activeTab === index}
+                aria-controls={`step-panel-${index}`}
                 onClick={() => handleStepClick(index)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleStepClick(index);
+                  }
+                }}
                 className={`
-                  p-6 rounded-2xl cursor-pointer border-2 transition-all duration-300
+                  p-6 rounded-2xl cursor-pointer border-2 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
                   ${activeTab === index
                     ? "border-primary-500 bg-gradient-to-r from-primary-50 to-white shadow-lg scale-[1.02]"
                     : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
@@ -155,6 +166,10 @@ export default function HowItWorks() {
                   {steps.map((step, index) => (
                     <div
                       key={index}
+                      id={`step-panel-${index}`}
+                      role="tabpanel"
+                      aria-labelledby={`step-tab-${index}`}
+                      hidden={activeTab !== index}
                       className={`
                         absolute top-0 left-0 w-full h-full pt-12 transition-all duration-500 ease-in-out
                         ${activeTab === index
